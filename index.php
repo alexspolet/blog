@@ -9,7 +9,7 @@
 include_once 'ShopProduct.php';
 include_once 'ShopProductWriter.php';
 
-$product1 = new BookProduct('Собачье сердце' , 'Булгаков'  , 'Михаил' , 5.99 , 311);
+$product1 = new BookProduct('Мастер и Маргарита' , 'Булгаков'  , 'Михаил' , 5.99 , 311);
 
 
 $product2 = new CDProduct( 'Химера', 'Ария', 'Группа' , 10.99 , 60);
