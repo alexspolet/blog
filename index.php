@@ -25,7 +25,7 @@ $writer->addProduct($product1);
 $writer->addProduct($product2);
 
 $writer->write();
-echo 112 .'<br>';
+echo 111 .'<br>';
 
 
 echo 1;
