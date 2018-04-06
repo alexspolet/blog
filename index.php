@@ -28,3 +28,4 @@ $writer->addProduct($product2);
 
 $writer->write();
 echo 112 .'<br>';
+
