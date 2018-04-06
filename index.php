@@ -17,15 +17,14 @@ $product2 = new CDProduct( 'Химера', 'Ария', 'Группа' , 10.99 , 
 //echo $product2->getSummaryLine();
 
 
+$product3 = new ShopProduct('bucket' , 'JVC' , 'firm' , 234);
 
 
-//echo 'Автор: ' . $product1->getProducer() .'<br>';
-
-//echo 'Исполнитель: '. $product2->getProducer() .'<br>';
 $writer = new ShopProductWriter();
 $writer->addProduct($product1);
 $writer->addProduct($product2);
 
 $writer->write();
 echo 112 .'<br>';
+
 
