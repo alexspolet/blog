@@ -13,11 +13,11 @@ $product1 = new BookProduct('Мастер и Маргарита' , 'Булгак
 
 
 $product2 = new CDProduct( 'Химера', 'Ария', 'Группа' , 10.99 , 60);
-//echo $product1->getSummaryLine();
-//echo $product2->getSummaryLine();
+
 
 
 $product3 = new ShopProduct('bucket' , 'JVC' , 'firm' , 234);
+$product4 = new BookProduct('Some book' , 'Author' , 'Name' , 345);
 
 
 $writer = new ShopProductWriter();
@@ -28,3 +28,4 @@ $writer->write();
 echo 112 .'<br>';
 
 
+echo 1;
