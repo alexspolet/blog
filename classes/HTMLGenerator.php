@@ -10,7 +10,7 @@ class HTMLGenerator
 {
   private $path;
   private $text;
-  public $beautyText;
+  public $beautyText = '';
 
   public function __construct($path)
   {
@@ -25,7 +25,6 @@ class HTMLGenerator
       $str .= "<p>$p</p>";
     }
     $this->beautyText = $str;
-
     return $this;
   }
 
@@ -43,4 +42,35 @@ class HTMLGenerator
   private function loadText(){
     $this->text = file_get_contents($this->path);
   }
+
+  public function wrapText($class = ''){
+    $class = $class === '' ? '' : 'class="'. $class .'"';
+    $this->beautyText = "<div $class>". $this->beautyText . '</div>';
+
+    return $this;
+  }
+
+  public function addTextToTop($text){
+    $this->beautyText = $text . $this->beautyText;
+    return $this;
+  }
+
+  public static function addTitle($text , $level = 1){
+    return "<h$level>$text</h$level>";
+  }
+
+  public static function addImg($path){
+    return '<img src="' . $path . '" alt="picture">';
+  }
+
+  public function findByTag($tag , $pos = null){
+    preg_match_all("#<$tag*>(.*?)</$tag>#" , $this->beautyText , $matches );
+
+    if (isset($pos) AND $pos !== 0){
+      $matches[0] = $matches[0][$pos - 1];
+      $matches[1] = $matches[1][$pos - 1];
+    }
+    return $matches;
+  }
+
 }

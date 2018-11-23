@@ -1,0 +1,10 @@
+.wrapper{
+    max-width: 500px;
+    color: #222222;
+    font: bold 12px Verdana;
+    background: #cccccc;
+    margin: 0 auto;
+}
+h1{
+    text-align: center;
+}

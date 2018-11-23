@@ -8,5 +8,10 @@
 
 class Math
 {
+  const PI = 3.14;
 
+  public static function circleRange($r)
+  {
+    return self::PI * $r * $r;
+  }
 }
