@@ -19,10 +19,7 @@ $genHTML->wrapEachInP()
     -> wrapAllInBox('wrapper')
     -> wrapAllInBox();
 
-$genHTML->addTextToTop($genHTML::addImg('./img/picture.jpg'));
+$genHTML->addTextToTop($genHTML::addImg('./img/picture.jpg'  , 200));
+$genHTML->addTo('<a href="index.php">To the main</a>' , 'p' , 2 ,  1);
 
-var_dump($genHTML->findByTag('p' , 7));
-
-$genHTML->addTo('<hr>' , 'p' , 2 ,  0);
-
-var_dump($genHTML->beautyText);
+$genHTML->addTo($genHTML::addImg('img/elephant.png' , 50 , 50) , 'p' , 3 , 1);

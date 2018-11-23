@@ -59,7 +59,10 @@ class HTMLGenerator
     return "<h$level>$text</h$level>";
   }
 
-  public static function addImg($path){
+  public static function addImg($path , $width = null, $height = null){
+    if (!($width === null OR $height === null)){
+      return '<img src="' . $path . '" alt="picture" width="' . $width . '" height="' . $height . '">';
+    }
     return '<img src="' . $path . '" alt="picture">';
   }
 
@@ -76,18 +79,16 @@ class HTMLGenerator
   public function addTo($html , $tag , $pos , $flag = 0){
     $tag = $this->findByTag($tag, $pos);
 
-    if (!$flag){
-      $strlen = strlen($tag[0]);
+    if (!$flag OR ($flag !== 1 AND $flag !==2)){
       $startpos = strpos($this->beautyText , $tag[0]);
-      $endpos = $startpos + $strlen;
-      $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $endpos);
+    }elseif ($flag === 1){
+      $startpos = strpos($this->beautyText , $tag[1]);
+    }elseif ($flag === 2){
+      $startpos = strpos($this->beautyText , $tag[0]) + strlen($tag[0]);
     }
 
-    /*var_dump($strlen);
-    var_dump($startpos);
-    var_dump($endpos);*/
-
-    var_dump($this->beautyText);
+    $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $startpos);
+    return $this->beautyText;
 
   }
 }
