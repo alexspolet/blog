@@ -43,7 +43,7 @@ class HTMLGenerator
     $this->text = file_get_contents($this->path);
   }
 
-  public function wrapText($class = ''){
+  public function wrapAllInBox($class = ''){
     $class = $class === '' ? '' : 'class="'. $class .'"';
     $this->beautyText = "<div $class>". $this->beautyText . '</div>';
 
@@ -73,4 +73,21 @@ class HTMLGenerator
     return $matches;
   }
 
+  public function addTo($html , $tag , $pos , $flag = 0){
+    $tag = $this->findByTag($tag, $pos);
+
+    if (!$flag){
+      $strlen = strlen($tag[0]);
+      $startpos = strpos($this->beautyText , $tag[0]);
+      $endpos = $startpos + $strlen;
+      $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $endpos);
+    }
+
+    /*var_dump($strlen);
+    var_dump($startpos);
+    var_dump($endpos);*/
+
+    var_dump($this->beautyText);
+
+  }
 }
