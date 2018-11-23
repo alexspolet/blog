@@ -15,11 +15,11 @@ function __autoload($name)
 $genHTML = new HTMLGenerator('./articles/article1');
 
 $genHTML->wrapEachInP()
+    ->addTextToTop($genHTML::addImg('./img/picture.jpg'  , 400 , 200))
     ->addTextToTop($genHTML::addTitle('Homework'))
     -> wrapAllInBox('wrapper')
     -> wrapAllInBox();
+;
+$genHTML->addTo('<a href="index.php">To the main</a>' , 'p' , null ,  1);
 
-$genHTML->addTextToTop($genHTML::addImg('./img/picture.jpg'  , 200));
-$genHTML->addTo('<a href="index.php">To the main</a>' , 'p' , 2 ,  1);
-
-$genHTML->addTo($genHTML::addImg('img/elephant.png' , 50 , 50) , 'p' , 3 , 1);
+$genHTML->addTo($genHTML::addImg('img/elephant.png' , 50 , 50) , 'p' , 1 , 1);

@@ -18,20 +18,22 @@ class HTMLGenerator
     $this->loadText();
   }
 
-  public function wrapEachInP(){
+  public function wrapEachInP()
+  {
     $arr = $this->explodeText($this->text);
     $str = '';
-    foreach ($arr as $p){
+    foreach ($arr as $p) {
       $str .= "<p>$p</p>";
     }
     $this->beautyText = $str;
     return $this;
   }
 
-  private function explodeText($text){
-    $arr = explode("\n" , $text);
+  private function explodeText($text)
+  {
+    $arr = explode("\n", $text);
     $res = [];
-    foreach ($arr as $p){
+    foreach ($arr as $p) {
       if ($p !== '')
         $res[] = $p;
     }
@@ -39,47 +41,54 @@ class HTMLGenerator
     return $res;
   }
 
-  private function loadText(){
+  private function loadText()
+  {
     $this->text = file_get_contents($this->path);
   }
 
-  public function wrapAllInBox($class = ''){
-    $class = $class === '' ? '' : 'class="'. $class .'"';
-    $this->beautyText = "<div $class>". $this->beautyText . '</div>';
+  public function wrapAllInBox($class = '')
+  {
+    $class = $class === '' ? '' : 'class="' . $class . '"';
+    $this->beautyText = "<div $class>" . $this->beautyText . '</div>';
 
     return $this;
   }
 
-  public function addTextToTop($text){
+  public function addTextToTop($text)
+  {
     $this->beautyText = $text . $this->beautyText;
     return $this;
   }
 
-  public static function addTitle($text , $level = 1){
+  public static function addTitle($text, $level = 1)
+  {
     return "<h$level>$text</h$level>";
   }
 
-  public static function addImg($path , $width = null, $height = null){
-    if (!($width === null OR $height === null)){
+  public static function addImg($path, $width = null, $height = null)
+  {
+    if (!($width === null OR $height === null)) {
       return '<img src="' . $path . '" alt="picture" width="' . $width . '" height="' . $height . '">';
     }
     return '<img src="' . $path . '" alt="picture">';
   }
 
-  public function findByTag($tag , $pos = null){
-    preg_match_all("#<$tag*>(.*?)</$tag>#" , $this->beautyText , $matches );
+  public function findByTag($tag, $pos = null)
+  {
+    preg_match_all("#<$tag*>(.*?)</$tag>#", $this->beautyText, $matches);
 
-    if (isset($pos) AND $pos !== 0){
+    if (isset($pos) AND $pos !== 0) {
       $matches[0] = $matches[0][$pos - 1];
       $matches[1] = $matches[1][$pos - 1];
     }
     return $matches;
   }
 
-  public function addTo($html , $tag , $pos , $flag = 0){
+  public function addTo($html, $tag, $pos = null, $flag = 0)
+  {
     $tag = $this->findByTag($tag, $pos);
 
-    if (!$flag OR ($flag !== 1 AND $flag !==2)){
+    /*if (!$flag OR ($flag !== 1 AND $flag !==2)){
       $startpos = strpos($this->beautyText , $tag[0]);
     }elseif ($flag === 1){
       $startpos = strpos($this->beautyText , $tag[1]);
@@ -87,8 +96,27 @@ class HTMLGenerator
       $startpos = strpos($this->beautyText , $tag[0]) + strlen($tag[0]);
     }
 
-    $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $startpos);
-    return $this->beautyText;
+    $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $startpos);*/
 
+    if (is_array($tag[$flag])){
+      foreach ($tag[$flag] as $item) {
+        if ($flag === 0 OR $flag === 1) {
+          $this->beautyText = str_replace($item, $html . $item, $this->beautyText);
+        } elseif ($flag === 2) {
+          $flag = 0;
+          $this->beautyText = str_replace($item, $item . $html, $this->beautyText);
+        }
+      }
+
+      return $this;
+  }
+    if ($flag === 0 OR $flag === 1) {
+      $this->beautyText = str_replace($tag[$flag], $html . $tag[$flag], $this->beautyText);
+    } elseif ($flag === 2) {
+      $flag = 0;
+      $this->beautyText = str_replace($tag[$flag], $tag[$flag] . $html, $this->beautyText);
+    }
+
+    return $this;
   }
 }
