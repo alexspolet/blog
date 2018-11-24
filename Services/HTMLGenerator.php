@@ -8,14 +8,15 @@
 
 class HTMLGenerator
 {
-  private $path;
+  //private $path;
   private $text;
   public $beautyText = '';
 
-  public function __construct($path)
+  public function __construct($text)
   {
-    $this->path = $path;
-    $this->loadText();
+    //$this->path = $path;
+    //$this->loadText();
+    $this->text = $text;
   }
 
   public function wrapEachInP(){
@@ -39,9 +40,9 @@ class HTMLGenerator
     return $res;
   }
 
-  private function loadText(){
+  /*private function loadText(){
     $this->text = file_get_contents($this->path);
-  }
+  }*/
 
   public function wrapAllInBox($class = ''){
     $class = $class === '' ? '' : 'class="'. $class .'"';
@@ -88,7 +89,7 @@ class HTMLGenerator
     }
 
     $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $startpos);
-    return $this->beautyText;
+    return $this;
 
   }
 }
