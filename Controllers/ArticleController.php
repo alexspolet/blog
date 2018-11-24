@@ -8,6 +8,13 @@
 
 class ArticleController
 {
+  public $get;
+
+  public function __construct($get)
+  {
+    $this->get = $get;
+  }
+
   public function indexAction(){
     $mArticle = new ArticleModel();
     $articles = $mArticle->getAll();
@@ -16,8 +23,11 @@ class ArticleController
         ['articles' => $articles]);
   }
 
-  public function ArticleAction(){
+  public function OneAction(){
+    $mArticle = new ArticleModel();
+    $article = $mArticle->getOne($this->get['id']);
 
+    echo $this->render('Views/article.html.php' , ['article' => $article ,'title' => 'article_' . $this->get['id']]);
   }
 
   public function render($path , $vars){

@@ -14,6 +14,10 @@ class ArticleModel
     return $this->extractData(scandir(self::DB));
   }
 
+  public function getOne($id){
+    return file_get_contents(self::DB . '/article_' . $id . '.txt');
+  }
+
   protected function extractData(array $arr){
     $res = [];
     foreach ($arr as $value){

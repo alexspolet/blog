@@ -3,5 +3,7 @@
 include_once 'Controllers/ArticleController.php';
 include_once 'Models/ArticleModel.php';
 
-$ctrl = new ArticleController();
-$ctrl->indexAction();
+$act = isset($_GET['act']) ? $_GET['act'] . 'Action' : 'IndexAction';
+
+$ctrl = new ArticleController($_GET);
+$ctrl->$act();
