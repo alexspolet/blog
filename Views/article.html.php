@@ -11,5 +11,6 @@
 <div>
   <?=$article?>
 </div>
+<div><a href="index.php">Come back</a></div>
 </body>
 </html>

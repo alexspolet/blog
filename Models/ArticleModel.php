@@ -14,7 +14,7 @@ class ArticleModel
     return $this->extractData(scandir(self::DB));
   }
 
-  public function getOne($id){
+  public function getById($id){
     return file_get_contents(self::DB . '/article_' . $id . '.txt');
   }
 

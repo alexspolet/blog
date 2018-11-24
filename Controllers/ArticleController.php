@@ -23,11 +23,12 @@ class ArticleController
         ['articles' => $articles]);
   }
 
-  public function OneAction(){
+  public function oneAction(){
     $mArticle = new ArticleModel();
-    $article = $mArticle->getOne($this->get['id']);
+    $id = $this->get['id'];
+    $article = $mArticle->getById($id);
 
-    echo $this->render('Views/article.html.php' , ['article' => $article ,'title' => 'article_' . $this->get['id']]);
+    echo $this->render('Views/article.html.php' , ['article' => $article ,'title' => 'article_' . $id]);
   }
 
   public function render($path , $vars){
