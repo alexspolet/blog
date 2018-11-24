@@ -17,6 +17,7 @@ class PageController extends BaseController
   }
 
   public function pageNotFoundAction(){
-    echo $this->render('404_page.html.php');
+    header('HTTP/1.1 Page not found');
+    echo $this->render('Views/404_page.html.php');
   }
 }

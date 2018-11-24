@@ -10,7 +10,7 @@
 <body>
 <div>
   <p>This page about us</p>
-  <p><a href="index.php?c=article">Come back</a></p>
+  <p><a href="index.php?c=Article">Come back</a></p>
 </div>
 </body>
 </html>

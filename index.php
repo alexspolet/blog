@@ -19,12 +19,10 @@ switch ($c){
 
   default:
     $ctrlName = 'Controllers\PageController';
-    $defaultMethod = Fa
+    $defaultMethod = 'pageNotFoundAction';
 }
 
 
-$act = isset($_GET['act']) ? $_GET['act'] . 'Action' : 'indexAction';
-
-$ctrl = new Controllers\ArticleController(new \Core\Request($_GET , $_POST , $_SERVER));
-
+$act = isset($_GET['act']) ? $_GET['act'] . 'Action' : $defaultMethod;
+$ctrl = new $ctrlName(new \Core\Request($_GET , $_POST , $_SERVER));
 $ctrl->$act();

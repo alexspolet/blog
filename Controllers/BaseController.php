@@ -20,7 +20,7 @@ abstract class BaseController
     $this->request = $request;
   }
 
-  protected function render($path , $vars){
+  protected function render($path , $vars = []){
     extract($vars);
     ob_start();
     include_once $path;

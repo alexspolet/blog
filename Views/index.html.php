@@ -10,9 +10,9 @@
 <body>
 <div>
   <? foreach ($articles as $item):?>
-  <p><a href="index.php?c=article&act=one&id=<?=$item['id']?>"><?=$item['name']?></a></p>
+  <p><a href="index.php?c=Article&act=one&id=<?=$item['id']?>"><?=$item['name']?></a></p>
   <?endforeach;?>
-    <p><a href="index.php?c=page&act=about">About us</a></p>
+    <p><a href="index.php?c=Page&act=about">About us</a></p>
 </div>
 </body>
 </html>
