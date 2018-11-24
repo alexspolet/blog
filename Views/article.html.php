@@ -13,8 +13,8 @@
   <?=$article?>
 </div>
 <div>
-    <p><a href="index.php?c=Article">Come back</a></p>
-    <p><a href="index.php?c=Page&act=about">About us</a></p>
+    <p><a href="index.php?c=article">Come back</a></p>
+    <p><a href="index.php?c=page&act=about">About us</a></p>
 </div>
 
 </body>

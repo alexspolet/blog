@@ -4,25 +4,25 @@ function __autoload($name){
     include_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }
 
-$c = isset($_GET['c']) ? $_GET['c'] . 'Controller' : 'ArticleController';
+$c = isset($_GET['c']) ? $_GET['c'] : 'article';
 
 switch ($c){
-  case  'ArticleController':
+  case  'article':
     $ctrlName = 'Controllers\ArticleController';
-    $defaultMethod = 'indexAction';
+    $defaultAction = 'indexAction';
     break;
 
-  case 'PageController':
+  case 'page':
     $ctrlName = 'Controllers\PageController';
-    $defaultMethod = 'aboutAction';
+    $defaultAction = 'aboutAction';
     break;
 
   default:
     $ctrlName = 'Controllers\PageController';
-    $defaultMethod = 'pageNotFoundAction';
+    $defaultAction = 'pageNotFoundAction';
 }
 
 
-$act = isset($_GET['act']) ? $_GET['act'] . 'Action' : $defaultMethod;
+$act = isset($_GET['act']) ? $_GET['act'] . 'Action' : $defaultAction;
 $ctrl = new $ctrlName(new \Core\Request($_GET , $_POST , $_SERVER));
 $ctrl->$act();
