@@ -6,14 +6,8 @@
  * Time: 20:08
  */
 
-class ArticleController
+class ArticleController extends MainController
 {
-  public $get;
-
-  public function __construct($get)
-  {
-    $this->get = $get;
-  }
 
   public function indexAction(){
     $mArticle = new ArticleModel();
@@ -31,10 +25,5 @@ class ArticleController
     echo $this->render('Views/article.html.php' , ['article' => $article ,'title' => 'article_' . $id]);
   }
 
-  public function render($path , $vars){
-    extract($vars);
-    ob_start();
-    include_once $path;
-    return ob_get_clean();
-  }
+
 }

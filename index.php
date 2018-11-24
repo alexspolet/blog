@@ -1,5 +1,5 @@
 <?php
-
+include_once 'Controllers/MainController.php';
 include_once 'Controllers/ArticleController.php';
 include_once 'Models/ArticleModel.php';
 
