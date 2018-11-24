@@ -77,19 +77,30 @@ class HTMLGenerator
     return $matches;
   }
 
-  public function addTo($html , $tag , $pos , $flag = 0){
+  public function addTo($html, $tag, $pos = null, $flag = 0)
+  {
+
     $tag = $this->findByTag($tag, $pos);
 
-    if (!$flag OR ($flag !== 1 AND $flag !==2)){
-      $startpos = strpos($this->beautyText , $tag[0]);
-    }elseif ($flag === 1){
-      $startpos = strpos($this->beautyText , $tag[1]);
-    }elseif ($flag === 2){
-      $startpos = strpos($this->beautyText , $tag[0]) + strlen($tag[0]);
+    if (is_array($tag[$flag])){
+      foreach ($tag[$flag] as $item) {
+        if ($flag === 0 OR $flag === 1) {
+          $this->beautyText = str_replace($item, $html . $item, $this->beautyText);
+        } elseif ($flag === 2) {
+          $flag = 0;
+          $this->beautyText = str_replace($item, $item . $html, $this->beautyText);
+        }
+      }
+      return $this;
     }
 
-    $this->beautyText = substr($this->beautyText , 0 , $startpos) . $html . substr($this->beautyText , $startpos);
-    return $this;
+    if ($flag === 0 OR $flag === 1) {
+      $this->beautyText = str_replace($tag[$flag], $html . $tag[$flag], $this->beautyText);
+    } elseif ($flag === 2) {
+      $flag = 0;
+      $this->beautyText = str_replace($tag[$flag], $tag[$flag] . $html, $this->beautyText);
+    }
 
+    return $this;
   }
 }

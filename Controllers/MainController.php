@@ -8,10 +8,10 @@
 
 abstract class MainController
 {
-  public $get;
-  public $post;
+  protected $get;
+  protected $post;
 
-  public function __construct($get = [] , $post = [])
+  public function __construct(array$get ,array $post)
   {
     $this->get = $get;
     $this->post = $post;
