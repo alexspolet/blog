@@ -6,7 +6,12 @@
  * Time: 20:08
  */
 
-class ArticleController extends MainController
+namespace Controllers;
+
+use Models\ArticleModel;
+use Services\HTMLGenerator;
+
+class ArticleController extends BaseController
 {
 
 
@@ -20,7 +25,7 @@ class ArticleController extends MainController
 
   public function oneAction(){
     $mArticle = new ArticleModel();
-    $id = $this->get['id'];
+    $id = $this->request->get['id'];
     $title = 'article_' . $id;
     $article = $mArticle->getById($id);
 

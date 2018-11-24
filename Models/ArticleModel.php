@@ -6,6 +6,8 @@
  * Time: 21:25
  */
 
+namespace Models;
+
 class ArticleModel
 {
   const DB = 'articles';

@@ -12,6 +12,10 @@
 <div>
   <?=$article?>
 </div>
-<div><a href="index.php">Come back</a></div>
+<div>
+    <p><a href="index.php?c=article">Come back</a></p>
+    <p><a href="index.php?c=page&act=about">About us</a></p>
+</div>
+
 </body>
 </html>

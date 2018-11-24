@@ -6,15 +6,18 @@
  * Time: 13:07
  */
 
-abstract class MainController
-{
-  protected $get;
-  protected $post;
+namespace Controllers;
 
-  public function __construct(array$get ,array $post)
+use Core\Request;
+
+abstract class BaseController
+{
+  protected $request;
+
+
+  public function __construct(Request $request)
   {
-    $this->get = $get;
-    $this->post = $post;
+    $this->request = $request;
   }
 
   protected function render($path , $vars){

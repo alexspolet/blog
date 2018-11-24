@@ -6,6 +6,8 @@
  * Time: 10:05
  */
 
+namespace Services;
+
 class HTMLGenerator
 {
   //private $path;

@@ -5,14 +5,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog</title>
+    <title>About us</title>
 </head>
 <body>
 <div>
-  <? foreach ($articles as $item):?>
-  <p><a href="index.php?c=article&act=one&id=<?=$item['id']?>"><?=$item['name']?></a></p>
-  <?endforeach;?>
-    <p><a href="index.php?c=page&act=about">About us</a></p>
+  <p>This page about us</p>
+  <p><a href="index.php?c=article">Come back</a></p>
 </div>
 </body>
 </html>
