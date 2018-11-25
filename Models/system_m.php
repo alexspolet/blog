@@ -1,12 +1,7 @@
 <?php
 
 
-function connectDb(){
-  $db = new PDO('mysql:host=localhost;dbname=blog', 'admin', '123456');
 
-  return $db;
-
-}
 
 function isAuth(){
   if (!(isset($_SESSION['auth']) AND $_SESSION['auth'])){

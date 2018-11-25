@@ -6,9 +6,9 @@
  * Time: 22:06
  */
 session_start();
-require_once 'model/system_m.php';
-require_once 'model/articles_m.php';
-require_once 'model/global_vars.php';
+require_once 'Models/system_m.php';
+require_once 'Models/ArticleModel.php';
+require_once 'Models/global_vars.php';
 
 $auth = isAuth();
 if (!$auth){
