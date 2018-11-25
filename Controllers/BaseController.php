@@ -22,9 +22,11 @@ abstract class BaseController
 
   public function __call($name, $arguments)
   {
+    $ctrl = new PageController($this->request);
+    $ctrl->pageNotFoundAction();
 
-    header('HTTP/1.1 404 Page not found');
-  echo $this->render('Views/404_page.html.php');
+    /*header('HTTP/1.1 404 Page not found');
+  echo $this->render('Views/404_page.html.php');*/
   }
 
   protected function render($path , $vars = []){
