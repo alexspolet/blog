@@ -20,6 +20,13 @@ abstract class BaseController
     $this->request = $request;
   }
 
+  public function __call($name, $arguments)
+  {
+
+    header('HTTP/1.1 404 Page not found');
+  echo $this->render('Views/404_page.html.php');
+  }
+
   protected function render($path , $vars = []){
     extract($vars);
     ob_start();
