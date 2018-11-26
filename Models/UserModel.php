@@ -10,9 +10,16 @@ namespace Models;
 
 Class UserModel extends BaseModel
 {
-  /**
-   * Article constructor.
-   */
+
+  private static $instance;
+
+  public static function getInstance(){
+    if (self::$instance == null){
+      self::$instance = new UserModel();
+    }
+    return self::$instance;
+  }
+
   public function __construct()
   {
     parent::__construct();
@@ -20,20 +27,20 @@ Class UserModel extends BaseModel
     $this->pk = 'id';
   }
 
-  function add($title, $text)
+  public function add($login, $pass)
   {
-    $query = "INSERT INTO {$this->table} (title, text) VALUES (?, ?)";
+    $query = "INSERT INTO {$this->table} (login, pass) VALUES (?, ?)";
     $stmt = $this->db->prepare($query);
-    $stmt->execute([$title, $text]);
+    $stmt->execute([$login, $pass]);
     $res = $this->db->lastInsertId();
     return $res;
   }
 
-  function edit($id, $title, $text)
+  public function edit($id, $login, $pass)
   {
-    $query = "UPDATE {$this->table} SET title=?, text=? WHERE id=?";
+    $query = "UPDATE {$this->table} SET login=?, pass=? WHERE {$this->pk}=?";
     $stmt = $this->db->prepare($query);
-    $res = $stmt->execute([$title, $text, $id]);
+    $res = $stmt->execute([$login, $pass, $id]);
     return $res;
   }
 

@@ -13,8 +13,14 @@ class Db
 {
   private static $db;
 
-  function getDb()
+  public static function getInstance(){
+    if (self::$db == null){
+      self::$db = self::getDb();
+    }
+    return self::$db;
+  }
+  private static function getDb()
   {
-    $this->db = new PDO('mysql:host=localhost;dbname=blog', 'admin', '123456');
+    return new PDO('mysql:host=localhost;dbname=blog', 'admin', '123456');
   }
 }

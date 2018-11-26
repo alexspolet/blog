@@ -9,18 +9,22 @@
 namespace Models;
 
 
+use Core\Db;
+
 abstract class BaseModel
 {
   protected $db;
   protected $table;
   protected $pk;
 
-  public function __construct($db)
+  public function __construct()
   {
-    $this->db = $db;
+    $this->db = Db::getInstance();
   }
 
-  function getAll()
+
+
+  public function getAll()
   {
     $query = "SELECT * FROM {$this->table}";
     $stmt = $this->db->prepare($query);
@@ -29,7 +33,7 @@ abstract class BaseModel
     return $res;
   }
 
-  function get($id)
+  public function get($id)
   {
     $query = "SELECT * FROM {$this->table} WHERE {$this->pk} = ?";
     $stmt = $this->db->prepare($query);
@@ -38,7 +42,7 @@ abstract class BaseModel
     return $res;
   }
 
-  function delete($id)
+  public function delete($id)
   {
     $query = "DELETE FROM {$this->table} WHERE {$this->pk} = ?";
     $stmt = $this->db->prepare($query);
