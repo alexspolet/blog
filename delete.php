@@ -8,7 +8,9 @@
 
 session_start();
 require_once 'Models/system_m.php';
-require_once 'Models/ArticleModel.php';
+function __autoload($name){
+  require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
+}
 
 $auth = isAuth();
 if (!$auth) {
@@ -18,13 +20,13 @@ if (!$auth) {
 
 $id = $_GET['aid'];
 $error = '';
-$db = connectDb();
-$article = getArticle($db, $id);
+$mArticle = \Models\ArticleModel::getInstance();
+$article = $mArticle->get($id);
 
 if (!$article) {
   $error = 'Article not found';
 } else {
-  $res = deleteArticle($db, $article['id']);
+  $res = $mArticle->delete( $article['id']);
   if (!$res) {
     $error = 'Cannot delete this article';
   }

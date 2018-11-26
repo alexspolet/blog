@@ -7,7 +7,9 @@
  */
 session_start();
 require_once 'Models/system_m.php';
-require_once 'Models/ArticleModel.php';
+function __autoload($name){
+  require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
+}
 
 $auth = isAuth();
 if (!$auth){
@@ -24,8 +26,8 @@ if (!isset($_GET['aid']) OR $_GET['aid'] == ''){
 
 $id = $_GET['aid'];
 
-$db = connectDb();
-$article = getArticle($db, $id);
+$mArticle = \Models\ArticleModel::getInstance();
+$article = $mArticle->get($id);
 
 if (!$article){
   $errors = 'Article not found';
@@ -43,7 +45,7 @@ if (!$article){
     }
 
     if (!$errors) {
-      $res = editArticle($db, $id, $title, $text);
+      $res = $mArticle->edit($id, $title, $text);
       if ($res){
         header("location: article.php?aid=$id");
         exit();

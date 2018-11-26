@@ -7,7 +7,9 @@
  */
 session_start();
 require_once 'Models/system_m.php';
-require_once 'Models/ArticleModel.php';
+function __autoload($name){
+  require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
+}
 
 $auth = isAuth();
 if (!$auth) {
@@ -26,8 +28,9 @@ if (!empty($_POST)) {
   $text = trim(filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
   $errors = validateParams($title, $text);
-  $db = connectDb();
-  $articles = getAllArticles($db);
+
+  $mArticle = \Models\ArticleModel::getInstance();
+  $articles = $mArticle->getAll();
 
   foreach ($articles as $article) {
     if ($title === $article['title']) {
@@ -37,7 +40,7 @@ if (!empty($_POST)) {
   }
 
   if (!$errors) {
-    $res = addArticle($db, $title, $text);
+    $res = $mArticle->add( $title, $text);
     if (!$res) {
       $errors[] = '<p>Error. We cannot add article to the db</p>';
 

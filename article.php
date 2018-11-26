@@ -7,12 +7,14 @@
  */
 session_start();
 require_once 'Models/system_m.php';
-require_once 'Models/ArticleModel.php';
+function __autoload($name){
+  require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
+}
 
 $auth = isAuth();
 $id = $_GET['aid'];
-$db = connectDb();
-$article = getArticle($db, $id);
+$mArticle = \Models\ArticleModel::getInstance();
+$article = $mArticle->get($id);
 
 if (!$article) {
   header("location:'index.php'");
