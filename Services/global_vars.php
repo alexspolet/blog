@@ -6,5 +6,5 @@
  * Time: 12:36
  */
 
-$main_vPath = 'view/main_v.php';
-$mainfile = 'index.php';
+//$main_vPath = 'view/main_v.php';
+//$mainfile = 'index.php';

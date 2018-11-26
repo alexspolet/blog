@@ -9,7 +9,6 @@
 session_start();
 require_once 'Models/system_m.php';
 require_once 'Models/ArticleModel.php';
-require_once 'Models/global_vars.php';
 
 
 $auth = isAuth();
@@ -30,7 +29,7 @@ if (!empty($_POST) AND isset($_POST['exit'])) {
 $path = getPath();
  $content = renderHtml($path);
 
-$html = renderHtml($main_vPath, [
+$html = renderHtml('view/main_v.php', [
      'content' => $content,
    'title' => 'account'
  ]);

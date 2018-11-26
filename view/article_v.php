@@ -8,4 +8,4 @@
         <a href="delete.php?aid=<?= $article['id'] ?>">Delete article</a>
     </p>
 <? endif; ?>
-<p><a href="<?= $mainfile ?>">To the main page</a></p>
+<p><a href="<?= 'index.php' ?>">To the main page</a></p>

@@ -8,7 +8,6 @@
 session_start();
 require_once 'Models/system_m.php';
 require_once 'Models/ArticleModel.php';
-require_once 'Models/global_vars.php';
 
 $auth = isAuth();
 if (!$auth) {
@@ -53,7 +52,7 @@ $content = renderHtml($path, [
     'errors' => $errors
 ]);
 
-$html = renderHtml($main_vPath, [
+$html = renderHtml('view/main_v.php', [
     'content' => $content,
     'title' => $title
 ]);
