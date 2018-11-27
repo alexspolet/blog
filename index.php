@@ -12,15 +12,11 @@ function __autoload($name){
 }
 
 
-$ctrl = new \Controllers\ArticleController(new \Core\Request($_GET , $_POST , $_SERVER));
+var_dump(new \Core\Request($_POST , $_SERVER));
+
+
+
+/*$ctrl = new \Controllers\ArticleController(new \Core\Request($_GET , $_POST , $_SERVER));
 echo $ctrl->getAuth();
 $ctrl->indexAction();
-$ctrl->renderHtml();
-
-
-/*$html = renderHtml('view/main_v.php', [
-    'content' => $content,
-    'title' => 'Main page'
-]);
-
-echo $html;*/
+$ctrl->renderHtml();*/
