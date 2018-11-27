@@ -11,22 +11,14 @@ function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }
 
-require_once 'Models/system_m.php';
 
-$auth = isAuth();
+$ctrl = new \Controllers\ArticleController(new \Core\Request($_GET , $_POST , $_SERVER));
+$ctrl->indexAction();
+$ctrl->renderHtml();
 
-$mArticle = \Models\ArticleModel::getInstance();
-$articles = $mArticle->getAll();
-
-$path = getPath();
-$content = renderHtml($path, [
-    'auth' => $auth,
-    'articles' => $articles,
-]);
-
-$html = renderHtml('view/main_v.php', [
+/*$html = renderHtml('view/main_v.php', [
     'content' => $content,
     'title' => 'Main page'
 ]);
 
-echo $html;
+echo $html;*/

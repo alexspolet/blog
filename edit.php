@@ -6,7 +6,6 @@
  * Time: 22:06
  */
 session_start();
-require_once 'Models/system_m.php';
 function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }

@@ -7,21 +7,32 @@
  */
 
 namespace Controllers;
+
+use Core\Tmp;
+use Core\Users;
 use Core\Request;
 
-class BaseController
+abstract class BaseController
 {
-  private $title;
-  private $content;
+  protected $title;
+  protected $content;
   private $auth;
-  private $request;
+  protected $request;
 
-  public function __construct($title, $auth , $request)
+  public function __construct(Request $request)
   {
-    $this->title = $title;
-    $this->auth = $auth;
+    $this->title = 'My blog';
+    $this->auth = Users::isAuth();
     $this->request = $request;
-    $this->content = $content;
+  }
+
+  public function renderHtml()
+  {
+    Tmp::renderHtml('Views/main_v.php', [
+        'title' => $this->title,
+        'auth' => $this->auth,
+        'content' => $this->content
+    ]);
   }
 
 }
