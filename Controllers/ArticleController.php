@@ -21,7 +21,12 @@ class ArticleController extends BaseController
 
     $this->content = Tmp::renderHtml('Views/index_v.php', [
         'articles' => $articles,
+        'auth' => $this->auth
     ]);
+  }
+
+  public function articleAction(){
+
   }
 
 }

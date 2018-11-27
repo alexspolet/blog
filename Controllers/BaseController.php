@@ -16,7 +16,7 @@ abstract class BaseController
 {
   protected $title;
   protected $content;
-  private $auth;
+  protected $auth;
   protected $request;
 
   public function __construct(Request $request)
@@ -26,9 +26,14 @@ abstract class BaseController
     $this->request = $request;
   }
 
+  public function getAuth()
+  {
+    $auth = isset($this->auth) ? 1 : 2;
+    return $auth;
+  }
   public function renderHtml()
   {
-    Tmp::renderHtml('Views/main_v.php', [
+    echo Tmp::renderHtml('Views/main_v.php', [
         'title' => $this->title,
         'auth' => $this->auth,
         'content' => $this->content

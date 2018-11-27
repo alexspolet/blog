@@ -13,8 +13,10 @@ function __autoload($name){
 
 
 $ctrl = new \Controllers\ArticleController(new \Core\Request($_GET , $_POST , $_SERVER));
+echo $ctrl->getAuth();
 $ctrl->indexAction();
 $ctrl->renderHtml();
+
 
 /*$html = renderHtml('view/main_v.php', [
     'content' => $content,
