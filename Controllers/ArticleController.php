@@ -13,7 +13,8 @@ use Core\Tmp;
 
 class ArticleController extends BaseController
 {
-  public function indexAction(){
+  public function indexAction()
+  {
     $mArticle = ArticleModel::getInstance();
     $articles = $mArticle->getAll();
 
@@ -25,7 +26,20 @@ class ArticleController extends BaseController
     ]);
   }
 
-  public function articleAction(){
+  public function articleAction()
+  {
+    $request = new \Core\Request($_POST, $_SERVER);
+    $id = $request->getGet()['id'];
+    $article = ArticleModel::getInstance()->get($id);
+
+    /*if (!$article) {
+      header("location:/");
+    }*/
+
+    $this->content = Tmp::renderHtml('Views/article_v.php', [
+        'article' => $article,
+        'auth' => $this->auth,
+    ]);
 
   }
 

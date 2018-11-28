@@ -4,8 +4,8 @@
 <? endif; ?>
 <? if ($auth): ?>
     <p>
-        <a href="edit.php?aid=<?= $article['id'] ?>">Edit article</a>
-        <a href="delete.php?aid=<?= $article['id'] ?>">Delete article</a>
+        <a href="/edit?id=<?= $article['id'] ?>">Edit article</a>
+        <a href="/delete?id=<?= $article['id'] ?>">Delete article</a>
     </p>
 <? endif; ?>
-<p><a href="<?= 'index.php' ?>">To the main page</a></p>
+<p><a href="<?= '/' ?>">To the main page</a></p>

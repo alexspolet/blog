@@ -10,8 +10,10 @@ function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }
 
-$auth = isAuth();
-$id = $_GET['aid'];
+
+//$id = $_GET['aid'];
+$request = new \Core\Request($_POST , $_SERVER);
+$id = $request->getGet();
 $mArticle = \Models\ArticleModel::getInstance();
 $article = $mArticle->get($id);
 
@@ -19,16 +21,15 @@ if (!$article) {
   header("location:'index.php'");
 }
 
-$path = getPath();
 $content = renderHtml($path, [
     'article' => $article,
     'auth' => $auth,
   'mainfile' => 'index.php'
 ]);
 
-$html = renderHtml('view/main_v.php' , [
+/*$html = renderHtml('view/main_v.php' , [
    'content' => $content,
   'title' => 'Article'
 ]);
 
-echo $html;
+echo $html;*/

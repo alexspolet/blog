@@ -12,7 +12,7 @@ function __autoload($name){
 }
 
 
-$auth = isAuth();
+$auth = \Core\Users::isAuth();
 if (!$auth) {
   header('location: auth.php');
   exit();
@@ -27,10 +27,10 @@ if (!empty($_POST) AND isset($_POST['exit'])) {
   header('location: index.php');
   exit();
 }
-$path = getPath();
- $content = renderHtml($path);
 
-$html = renderHtml('view/main_v.php', [
+ $content = \Core\Tmp::renderHtml('Views/account_v.php');
+
+$html = \Core\Tmp::renderHtml('Views/main_v.php', [
      'content' => $content,
    'title' => 'account'
  ]);

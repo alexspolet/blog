@@ -12,7 +12,7 @@ function __autoload($name){
 
 $accountFile = './account.php';
 $error = '';
-$auth = isAuth();
+$auth = \Core\Users::isAuth();
 if ($auth) {
   header("location: $accountFile");
   exit();
@@ -43,15 +43,14 @@ if (!empty($_POST)) {
   }
 }
 
-$path = getPath();
-$content = renderHtml($path, [
+$content = \Core\Tmp::renderHtml('Views/auth_v.php', [
  'login' => $login,
  'pass' => $pass,
  'setCookie' => $setCookie,
  'error' => $error
 ]);
 
-$html = renderHtml('view/main_v.php' , [
+$html = \Core\Tmp::renderHtml('Views/main_v.php' , [
     'title' => 'authorization',
     'content' => $content
     ]);
