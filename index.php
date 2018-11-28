@@ -1,3 +1,6 @@
+<!--TODO перенести 404 action в BaseController-->
+<!--TODO не empty($_POST) в Controller->actions, a через $this->request-->
+
 <?php
 /**
  * Created by PhpStorm.
@@ -11,13 +14,6 @@ function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }
 
-
 $app = new \Core\App(new \Core\Request($_POST , $_SERVER));
 $app->goApp();
 
-
-
-/*$ctrl = new \Controllers\ArticleController(new \Core\Request($_GET , $_POST , $_SERVER));
-echo $ctrl->getAuth();
-$ctrl->indexAction();
-$ctrl->renderHtml();*/

@@ -158,4 +158,41 @@ class ArticleController extends BaseController
         'errors' => $errors
     ]);
   }
+
+  public function deleteAction(){
+    if (!$this->auth) {
+      header('location: /');
+      exit();
+    }
+
+    $get = $this->request->getGet();
+    if(!isset($get['id'])){
+      $page = new PageController($this->request);
+      $page->page404Action();
+      $page->renderHtml();
+    }
+    $id = $get['id'];
+
+    $errors = [];
+    $mArticle = ArticleModel::getInstance();
+    $article = $mArticle->get($id);
+
+    if (!$article) {
+      $page = new PageController($this->request);
+      $page->page404Action();
+      $page->renderHtml();
+    }
+      $res = $mArticle->delete( $article['id']);
+      if (!$res) {
+        $errors[] = 'Cannot delete this article';
+
+    }
+
+    $path = Tmp::getPath($this->request);
+    $this->content = Tmp::renderHtml($path, [
+        'errors' => $errors
+    ]);
+
+
+  }
 }

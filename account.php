@@ -1,3 +1,5 @@
+<!--TODO do this file in OOP
+
 <?php
 /**
  * Created by PhpStorm.
@@ -21,8 +23,8 @@ if (!$auth) {
 if (!empty($_POST) AND isset($_POST['exit'])) {
   $_SESSION['auth'] = false;
 
-  setcookie('login', 'admin', time() - 1); /*unset ($_COOKIE['login']);*/
-  setcookie('pass', md5('123456'), time() - 1); /*unset ($_COOKIE['pass']);*/
+  setcookie('login', 'admin', time() - 1);
+  setcookie('pass', md5('123456'), time() - 1);
 
   header('location: index.php');
   exit();
