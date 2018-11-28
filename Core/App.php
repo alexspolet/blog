@@ -24,13 +24,25 @@ class App
     $this->request = $request;
   }
 
-  public function goApp(){
-    if (!$this->getRouteByRequest()){
-      $ctrl = new ''
+  public function goApp()
+  {
+    $params = $this->getRouteByRequest();
+    if (!$params) {
+      $ctrl = new \Controllers\PageController($this->request);
+      $action = 'page404Action';
+
+    } else {
+      $ctrl = new $params['controller']($this->request);
+      $action = $params['action'];
     }
+
+    $ctrl->$action();
+    $ctrl->renderHTML();
   }
 
-  private function getRouteByRequest(){
+
+  private function getRouteByRequest()
+  {
     return isset($this->getRoutes()[$this->request->getRoute()]) ? $this->getRoutes()[$this->request->getRoute()] : false;
   }
 
@@ -45,7 +57,7 @@ class App
             '/article' =>
                 [
                     'controller' => 'Controllers\ArticleController',
-                    'action' => 'indexAction'
+                    'action' => 'articleAction'
                 ],
             '/add' =>
                 [

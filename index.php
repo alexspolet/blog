@@ -12,7 +12,8 @@ function __autoload($name){
 }
 
 
-var_dump(new \Core\Request($_POST , $_SERVER));
+$app = new \Core\App(new \Core\Request($_POST , $_SERVER));
+$app->goApp();
 
 
 

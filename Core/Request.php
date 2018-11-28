@@ -21,7 +21,6 @@ class Request
 
   /**
    * Request constructor.
-   * @param $get
    * @param $post
    * @param $server
    */
@@ -33,29 +32,38 @@ class Request
     $this->makeParams();
   }
 
-  private function makeParams(){
+  private function makeParams()
+  {
     $request = $_SERVER['REQUEST_URI'];
     $get = [];
-    $buffer = explode('?' , $request);
+    $buffer = explode('?', $request);
     $this->route = $buffer[0];
 
-    $arr = explode('&' , $buffer[1]);
-    foreach ($arr as  $item){
-      $last_buffer = explode('=' , $item);
-      $get[$last_buffer[0]] = $last_buffer[1];
+    if (isset ($buffer[1])) {
+      $arr = explode('&', $buffer[1]);
+      foreach ($arr as $item) {
+        $last_buffer = explode('=', $item);
+        if (isset( $last_buffer[1])){
+          $get[$last_buffer[0]] = $last_buffer[1];
+        }
+
+      }
+      $this->get = $get;
     }
-    $this->get = $get;
   }
 
-  public function isGet(){
+  public function isGet()
+  {
     return $_SERVER['REQUEST_METHOD'] === self::METHOD_GET;
   }
 
-  public function isPost(){
+  public function isPost()
+  {
     return $_SERVER['REQUEST_METHOD'] === self::METHOD_POST;
   }
 
-  public function getMethod(){
+  public function getMethod()
+  {
     return $_SERVER['REQUEST_METHOD'];
   }
 
