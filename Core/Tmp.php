@@ -7,7 +7,7 @@
  */
 
 namespace Core;
-
+use Core\Request;
 
 class Tmp
 {
@@ -19,12 +19,15 @@ class Tmp
     return $res;
   }
 
-  /*public static function getPath(){
-    $file = $_SERVER['PHP_SELF'];
-    $file = substr($file , 0 , -4);
-    $path = 'view' . $file . '_v.php';
+  public static function getPath(Request $request){
+    $file = $request->getRoute();
+    if ($file !== '/'){
+    $path = 'Views' . $file . '_v.php';
+      }else{
+      $path = 'Views/index_v.php';
+    }
     return $path;
-  }*/
+  }
 
   public static function validateParams($title , $text){
     $errors = [];

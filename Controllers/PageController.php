@@ -16,6 +16,7 @@ class PageController extends BaseController
   public function page404Action()
   {
     $this->title = '404. Page not found';
-    $this->content = Tmp::renderHtml('Views/404Page_v.php');
+    $path = 'Views/404Page_v.php';
+    $this->content = Tmp::renderHtml($path);
   }
 }
