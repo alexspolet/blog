@@ -10,7 +10,6 @@ function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }
 
-$auth = isAuth();
 if (!$auth){
   header('location: auth.php');
   exit();

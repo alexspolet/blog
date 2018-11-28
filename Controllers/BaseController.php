@@ -28,8 +28,8 @@ abstract class BaseController
 
   public function getAuth()
   {
-    $auth = isset($this->auth) ? 1 : 2;
-    return $auth;
+    return $this->auth;
+
   }
   public function renderHtml()
   {

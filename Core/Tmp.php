@@ -32,7 +32,7 @@ class Tmp
   public static function validateParams($title , $text){
     $errors = [];
     if ($title === '' OR $text === '') {
-      $errors = 'All fields must be full';
+      $errors[] = 'All fields must be full';
     }
 
     return $errors;
