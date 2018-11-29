@@ -128,7 +128,7 @@ class ArticleController extends BaseController
         }
 
         if (!$errors) {
-          $res = $mArticle->edit($id, $title, $text);
+          $res = $mArticle->edit(['title' => $title, 'text' => $text] , "id = $id");
           if ($res){
             header("location: /article?id=$id");
             exit();

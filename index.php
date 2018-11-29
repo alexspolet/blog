@@ -7,6 +7,8 @@
  */
 session_start();
 
+//\Core\SQL::getInstance()->update('article' , ['title' => 'newtitle' , 'text' => 'newtext'] , 'id = 2');
+
 function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
 }

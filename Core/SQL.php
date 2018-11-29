@@ -72,4 +72,31 @@ class SQL
     return $this->db->lastInsertId();
   }
 
+  public function update($table , $object , $where){
+    $arr = [];
+    foreach ($object as $key => $value){
+      $arr[$key] = ":$key";
+
+      if ($value == null){
+        $object[$key] = 'NULL';
+      }
+    }
+    $string = '';
+    foreach ($arr as $key => $value){
+      $string .= "$key = $value, ";
+    }
+      $string = substr($string , 0 , -2);
+    $query = "UPDATE {$table} SET {$string} WHERE {$where}";
+
+
+    $stmt = $this->db->prepare($query);
+    $res = $stmt->execute($object);
+
+    if ($stmt->errorCode() !== \PDO::ERR_NONE){
+      die($stmt->errorInfo()[2]);
+    }
+
+    return $res;
+  }
+
 }
