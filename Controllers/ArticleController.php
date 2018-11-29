@@ -60,7 +60,7 @@ class ArticleController extends BaseController
     $text = '';
     $errors = [];
 
-    if (!empty($this->request->getPost())) {
+    if ($this->request->isPost()) {
       $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
       $text = trim(filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
@@ -118,7 +118,7 @@ class ArticleController extends BaseController
       $title = $article['title'];
       $text = $article['text'];
 
-      if (!empty($this->request->getPost())) {
+      if (!empty($this->request->isPost())) {
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $text = trim(filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
@@ -171,7 +171,6 @@ class ArticleController extends BaseController
       $res = $mArticle->delete( $article['id']);
       if (!$res) {
         $errors[] = 'Cannot delete this article';
-
     }
 
     $path = Tmp::getPath($this->request);

@@ -25,15 +25,4 @@ Class ArticleModel extends BaseModel
     $this->table = 'articles';
     $this->pk = 'id';
   }
-
-  /*public function edit($id, $title, $text)
-  {
-    $query = "UPDATE {$this->table} SET title=?, text=? WHERE {$this->pk}=?";
-    $stmt = $this->db->prepare($query);
-    $res = $stmt->execute([$title, $text, $id]);
-    return $res;
-  }*/
-
-
-
 }

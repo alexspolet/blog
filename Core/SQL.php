@@ -99,4 +99,15 @@ class SQL
     return $res;
   }
 
+  public function delete($table , $where){
+    $query = "DELETE FROM {$table} WHERE {$where}";
+    $stmt = $this->db->prepare($query);
+    $res = $stmt->execute();
+
+    if ($stmt->errorCode() !== \PDO::ERR_NONE ){
+      die($stmt->errorInfo()[2]);
+    }
+    return $res;
+  }
+
 }

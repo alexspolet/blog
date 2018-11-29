@@ -7,7 +7,7 @@
  */
 session_start();
 
-//\Core\SQL::getInstance()->update('article' , ['title' => 'newtitle' , 'text' => 'newtext'] , 'id = 2');
+//TODO We should do auth.php . account.php
 
 function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';

@@ -38,25 +38,13 @@ abstract class BaseModel
     return SQL::getInstance()->insert($this->table , $object);
   }
 
-  /*public function edit($id, $title, $text)
-  {
-    $query = "UPDATE {$this->table} SET title=?, text=? WHERE {$this->pk}=?";
-    $stmt = $this->db->prepare($query);
-    $res = $stmt->execute([$title, $text, $id]);
-    return $res;
-  }*/
-
   public function edit(array $object , $where){
     return SQL::getInstance()->update($this->table , $object , $where);
   }
 
-
   public function delete($id)
   {
-    $query = "DELETE FROM {$this->table} WHERE {$this->pk} = ?";
-    $stmt = $this->db->prepare($query);
-    $res = $stmt->execute([$id]);
-    return $res;
+    return SQL::getInstance()->delete($this->table , "$this->pk = $id");
   }
 
 }
