@@ -23,28 +23,19 @@ abstract class BaseModel
     $this->db = Db::getInstance();
   }
 
-
-
   public function getAll()
   {
-    /*$query = "SELECT * FROM {$this->table}";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute();
-    $res = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    return $res;*/
-
     return SQL::getInstance()->query("SELECT * FROM {$this->table}");
   }
 
   public function get($id)
   {
-    /*$query = "SELECT * FROM {$this->table} WHERE {$this->pk} = ?";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute([$id]);
-    $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-    return $res;*/
-
     return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$this->pk} = {$id}")[0];
+  }
+
+  public function add(array $object)
+  {
+    return SQL::getInstance()->insert($this->table , $object);
   }
 
   public function delete($id)

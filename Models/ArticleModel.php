@@ -26,17 +26,6 @@ Class ArticleModel extends BaseModel
     $this->pk = 'id';
   }
 
-  //TODO there were function
-
-  public function add($title, $text)
-  {
-    $query = "INSERT INTO {$this->table} (title, text) VALUES (?, ?)";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute([$title, $text]);
-    $res = $this->db->lastInsertId();
-    return $res;
-  }
-
   public function edit($id, $title, $text)
   {
     $query = "UPDATE {$this->table} SET title=?, text=? WHERE {$this->pk}=?";

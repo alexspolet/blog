@@ -14,3 +14,4 @@ function __autoload($name){
 $app = new \Core\App(new \Core\Request($_POST , $_SERVER));
 $app->goApp();
 
+

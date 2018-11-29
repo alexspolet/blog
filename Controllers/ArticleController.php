@@ -78,7 +78,7 @@ class ArticleController extends BaseController
 
       if (!$errors) {
 
-        $res = $mArticle->add( $title, $text);
+        $res = $mArticle->add( ['title' => $title, 'text' => $text]);
         if (!$res) {
           $errors[] = 'Error. We cannot add article to the db';
 

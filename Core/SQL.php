@@ -32,12 +32,44 @@ class SQL
   public function query($query){
     $stmt = $this->db->prepare($query);
     $stmt->execute();
+
+    if ($stmt->errorCode() !== \PDO::ERR_NONE){
+      die($stmt->errorInfo()[2]);
+    }
     return $stmt->fetchAll();
 
   }
 
-  public function insert($table , $object){
+  /**
+   * @param $table //Name of table
+   * @param array $object //Ассоциативный массив, где ключ - название столбца , значение - вводимый текст
+   * @return string
+   */
+  public function insert($table , array $object){
 
+    $columns = [];
+    $masks = [];
+    foreach ($object as $key => $value){
+      $columns[] = $key;
+      $masks[] = ":$key";
+      if ($value == null){
+        $object[$key] = 'NULL';
+      }
+    }
+
+    $columns_all = implode(', ' , $columns);
+    $masks_all = implode(', ' , $masks);
+
+    $query = "INSERT INTO {$table} ({$columns_all}) VALUES ({$masks_all})";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->execute($object);
+
+    if ($stmt->errorCode() !== \PDO::ERR_NONE){
+      die($stmt->errorInfo()[2]);
+
+    }
+    return $this->db->lastInsertId();
   }
 
 }
