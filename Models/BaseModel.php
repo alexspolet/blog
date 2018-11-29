@@ -10,6 +10,7 @@ namespace Models;
 
 
 use Core\Db;
+use Core\SQL;
 
 abstract class BaseModel
 {
@@ -26,20 +27,24 @@ abstract class BaseModel
 
   public function getAll()
   {
-    $query = "SELECT * FROM {$this->table}";
+    /*$query = "SELECT * FROM {$this->table}";
     $stmt = $this->db->prepare($query);
     $stmt->execute();
     $res = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    return $res;
+    return $res;*/
+
+    return SQL::getInstance()->query("SELECT * FROM {$this->table}");
   }
 
   public function get($id)
   {
-    $query = "SELECT * FROM {$this->table} WHERE {$this->pk} = ?";
+    /*$query = "SELECT * FROM {$this->table} WHERE {$this->pk} = ?";
     $stmt = $this->db->prepare($query);
     $stmt->execute([$id]);
     $res = $stmt->fetch(\PDO::FETCH_ASSOC);
-    return $res;
+    return $res;*/
+
+    return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$this->pk} = {$id}")[0];
   }
 
   public function delete($id)

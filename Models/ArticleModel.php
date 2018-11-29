@@ -26,6 +26,8 @@ Class ArticleModel extends BaseModel
     $this->pk = 'id';
   }
 
+  //TODO there were function
+
   public function add($title, $text)
   {
     $query = "INSERT INTO {$this->table} (title, text) VALUES (?, ?)";
