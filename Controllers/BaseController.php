@@ -8,11 +8,12 @@
 
 namespace Controllers;
 
+use Core\App;
 use Core\Tmp;
 use Core\Users;
 use Core\Request;
 
-abstract class BaseController
+class BaseController
 {
   protected $title;
   protected $content;
@@ -38,6 +39,15 @@ abstract class BaseController
         'auth' => $this->auth,
         'content' => $this->content
     ]);
+  }
+
+  public function page404Action()
+  {
+    $this->title = '404. Page not found';
+    $path = 'Views/404Page_v.php';
+    header('HTTP/1.1 404 page not found');
+    $this->content = Tmp::renderHtml($path);
+    $this->renderHtml();
   }
 
 }

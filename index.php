@@ -1,6 +1,3 @@
-<!--TODO перенести 404 action в BaseController-->
-<!--TODO не empty($_POST) в Controller->actions, a через $this->request-->
-
 <?php
 /**
  * Created by PhpStorm.

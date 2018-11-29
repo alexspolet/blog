@@ -32,19 +32,13 @@ class ArticleController extends BaseController
   {
     $get = $this->request->getGet();
     if(!isset($get['id'])){
-      $page = new PageController($this->request);
-      $page->page404Action();
-      $page->renderHtml();
+      $this->page404Action();
     }
     $id = $get['id'];
     $article = ArticleModel::getInstance()->get($id);
 
-    //@TODO we need to redirect user to the 404page
     if (!$article) {
-      //header("location:/");
-      $page = new PageController($this->request);
-      $page->page404Action();
-      $page->renderHtml();
+      $this->page404Action();
     }
     $path = Tmp::getPath($this->request);
     $this->content = Tmp::renderHtml($path, [
@@ -66,7 +60,7 @@ class ArticleController extends BaseController
     $text = '';
     $errors = [];
 
-    if (!empty($_POST)) {
+    if (!empty($this->request->getPost())) {
       $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
       $text = trim(filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
@@ -111,9 +105,7 @@ class ArticleController extends BaseController
 
     $get = $this->request->getGet();
     if(!isset($get['id'])){
-      $page = new PageController($this->request);
-      $page->page404Action();
-      $page->renderHtml();
+      $this->page404Action();
     }
     $id = $get['id'];
 
@@ -121,15 +113,12 @@ class ArticleController extends BaseController
     $article = $mArticle->get($id);
 
     if (!$article){
-      //@TODO We need to do redirect to the 404 page
-      $page = new PageController($this->request);
-      $page->page404Action();
-      $page->renderHtml();
+      $this->page404Action();
     }else{
       $title = $article['title'];
       $text = $article['text'];
 
-      if (!empty($_POST)) {
+      if (!empty($this->request->getPost())) {
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $text = trim(filter_input(INPUT_POST, 'text', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
@@ -167,9 +156,7 @@ class ArticleController extends BaseController
 
     $get = $this->request->getGet();
     if(!isset($get['id'])){
-      $page = new PageController($this->request);
-      $page->page404Action();
-      $page->renderHtml();
+      $this->page404Action();
     }
     $id = $get['id'];
 
@@ -178,9 +165,8 @@ class ArticleController extends BaseController
     $article = $mArticle->get($id);
 
     if (!$article) {
-      $page = new PageController($this->request);
-      $page->page404Action();
-      $page->renderHtml();
+      $this->page404Action();
+
     }
       $res = $mArticle->delete( $article['id']);
       if (!$res) {
