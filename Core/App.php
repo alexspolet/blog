@@ -8,28 +8,28 @@
 
 namespace Core;
 
-
-use Controllers\ArticleController;
-use Controllers\UserController;
+use \Controllers\PageController;
 
 class App
 {
 
   private $request;
-
+  private $routes;
   /**
    * App constructor.
+   * @param $request
    */
   public function __construct(Request $request)
   {
     $this->request = $request;
+    $this->routes = include_once ROOT . '/Core/configs/RoutingMaps.php';
   }
 
   public function goApp()
   {
     $params = $this->getRouteByRequest();
     if (!$params) {
-      $ctrl = new \Controllers\PageController($this->request);
+      $ctrl = new PageController($this->request);
       $action = 'page404Action';
 
     } else {
@@ -44,48 +44,8 @@ class App
 
   private function getRouteByRequest()
   {
-    return isset($this->getRoutes()[$this->request->getRoute()]) ? $this->getRoutes()[$this->request->getRoute()] : false;
-  }
 
-  private function getRoutes()
-  {
-    return
-        ['/' =>
-            [
-                'controller' => 'Controllers\ArticleController',
-                'action' => 'indexAction'
-            ],
-            '/article' =>
-                [
-                    'controller' => 'Controllers\ArticleController',
-                    'action' => 'articleAction'
-                ],
-            '/add' =>
-                [
-                    'controller' => 'Controllers\ArticleController',
-                    'action' => 'addAction'
-                ],
-            '/edit' =>
-                [
-                    'controller' => 'Controllers\ArticleController',
-                    'action' => 'editAction'
-                ],
-            '/delete' =>
-                [
-                    'controller' => 'Controllers\ArticleController',
-                    'action' => 'deleteAction'
-                ],
-            '/auth' =>
-                [
-                'controller' =>'Controllers\UserController',
-                  'action' => 'authAction'
-                ],
 
-            '/account' =>
-                [
-                    'controller' =>'Controllers\UserController',
-                    'action' => 'accountAction'
-                ]
-        ];
+    return isset($this->routes[$this->request->getRoute()]) ? $this->routes[$this->request->getRoute()] : false;
   }
 }
