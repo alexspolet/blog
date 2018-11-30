@@ -7,17 +7,10 @@
  */
 
 namespace Core;
-use Core\Request;
 
 class Tmp
 {
-  public static function renderHtml($path , $vars = []){
-    ob_start();
-    extract($vars);
-    include_once $path;
-    $res = ob_get_clean();
-    return $res;
-  }
+
 
   public static function getPath(Request $request){
     $file = $request->getRoute();

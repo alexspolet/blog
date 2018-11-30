@@ -20,7 +20,7 @@ class Request
   private $route;
 
   /**
-   * Request constructor.
+   * Request constructor.ls
    * @param $post
    * @param $server
    */

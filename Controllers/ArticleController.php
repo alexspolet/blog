@@ -20,7 +20,7 @@ class ArticleController extends BaseController
     $articles = $mArticle->getAll();
 
     $path = Tmp::getPath(new Request($_POST , $_SERVER));
-    $this->content = Tmp::renderHtml($path, [
+    $this->content = self::generateInnerTemplate($path, [
         'articles' => $articles,
         'auth' => $this->auth
     ]);
@@ -39,7 +39,7 @@ class ArticleController extends BaseController
       $this->page404Action();
     }
     $path = Tmp::getPath($this->request);
-    $this->content = Tmp::renderHtml($path, [
+    $this->content = self::generateInnerTemplate($path, [
         'article' => $article,
         'auth' => $this->auth,
     ]);
@@ -85,7 +85,7 @@ class ArticleController extends BaseController
     }
 
     $path = Tmp::getPath($this->request);
-    $this->content = Tmp::renderHtml($path, [
+    $this->content = self::generateInnerTemplate($path, [
         'title' => $title,
         'text' => $text,
         'errors' => $errors
@@ -137,7 +137,7 @@ class ArticleController extends BaseController
     }
 
     $path = Tmp::getPath($this->request);
-    $this->content = Tmp::renderHtml($path, [
+    $this->content = self::generateInnerTemplate($path, [
         'id' => $id,
         'title' => $title,
         'text' => $text,
@@ -171,7 +171,7 @@ class ArticleController extends BaseController
     }
 
     $path = Tmp::getPath($this->request);
-    $this->content = Tmp::renderHtml($path, [
+    $this->content = self::generateInnerTemplate($path, [
         'errors' => $errors
     ]);
 

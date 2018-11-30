@@ -8,7 +8,6 @@
 
 namespace Controllers;
 
-use Core\Tmp;
 use Core\Request;
 
 class BaseController
@@ -25,27 +24,39 @@ class BaseController
     $this->request = $request;
   }
 
-  public function getAuth()
+  protected function getAuth()
   {
     return $this->auth;
 
   }
   public function renderHtml()
   {
-    echo Tmp::renderHtml('Views/main_v.php', [
+    echo self::generateInnerTemplate('Views/main_v.php', [
         'title' => $this->title,
         'auth' => $this->auth,
         'content' => $this->content
     ]);
   }
 
-  public function page404Action()
+  protected function page404Action()
   {
     $this->title = '404. Page not found';
     $path = 'Views/404Page_v.php';
     header('HTTP/1.1 404 page not found');
-    $this->content = Tmp::renderHtml($path);
+    $this->content = self::generateInnerTemplate($path);
     $this->renderHtml();
+  }
+
+  protected static function generateInnerTemplate($path , $vars = []){
+    ob_start();
+    extract($vars);
+    include_once $path;
+    $res = ob_get_clean();
+    return $res;
+  }
+
+  protected function getRedirect(){
+
   }
 
 }

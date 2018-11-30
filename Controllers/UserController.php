@@ -58,7 +58,7 @@ class UserController extends BaseController
 
     $this->title = 'Authorization';
     $path = Tmp::getPath($this->request);
-    $this->content = Tmp::renderHtml($path, [
+    $this->content = self::generateInnerTemplate($path, [
         'login' => $login,
         'pass' => $pass,
         'setCookie' => $setCookie,
@@ -82,6 +82,6 @@ class UserController extends BaseController
       exit();
     }
 
-    $this->content = Tmp::renderHtml('Views/account_v.php');
+    $this->content = self::generateInnerTemplate('Views/account_v.php');
   }
 }
