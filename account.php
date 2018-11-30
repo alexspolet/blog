@@ -16,7 +16,7 @@ function __autoload($name){
 
 $auth = \Controllers\UserController::isAuth();
 if (!$auth) {
-  header('location: auth.php');
+  header('location: /auth');
   exit();
 }
 
@@ -26,7 +26,7 @@ if (!empty($_POST) AND isset($_POST['exit'])) {
   setcookie('login', 'admin', time() - 1);
   setcookie('pass', md5('123456'), time() - 1);
 
-  header('location: index.php');
+  header('location: /');
   exit();
 }
 

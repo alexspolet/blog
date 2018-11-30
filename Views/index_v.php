@@ -1,7 +1,7 @@
 <?if ($auth):?>
     <p><a href="account.php">To the private account</a></p>
   <?else:?>
-    <p><a href="auth.php">Authorization</a></p>
+    <p><a href="/auth">Authorization</a></p>
 <?endif;?>
 <hr>
 

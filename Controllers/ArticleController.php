@@ -49,7 +49,7 @@ class ArticleController extends BaseController
   public function addAction(){
 
     if (!$this->auth) {
-      header('location: auth.php');
+      header('location: /auth');
       exit();
     }
 
@@ -79,7 +79,7 @@ class ArticleController extends BaseController
         if (!$res) {
           $errors[] = 'Error. We cannot add article to the db';
         }
-        
+
         header("location: /article?id=$res");
       }
     }
@@ -94,7 +94,7 @@ class ArticleController extends BaseController
 
   public function editAction(){
     if (!$this->auth){
-      header('location: auth.php');
+      header('location: /auth');
       exit();
     }
 

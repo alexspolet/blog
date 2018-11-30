@@ -10,6 +10,7 @@ namespace Core;
 
 
 use Controllers\ArticleController;
+use Controllers\UserController;
 
 class App
 {
@@ -74,6 +75,11 @@ class App
                     'controller' => 'Controllers\ArticleController',
                     'action' => 'deleteAction'
                 ],
+            '/auth' =>
+                [
+                'controller' =>'Controllers\UserController',
+                  'action' => 'authAction'
+                ]
 
         ];
   }
