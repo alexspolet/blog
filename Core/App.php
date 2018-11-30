@@ -79,8 +79,13 @@ class App
                 [
                 'controller' =>'Controllers\UserController',
                   'action' => 'authAction'
-                ]
+                ],
 
+            '/account' =>
+                [
+                    'controller' =>'Controllers\UserController',
+                    'action' => 'accountAction'
+                ]
         ];
   }
 }

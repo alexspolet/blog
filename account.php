@@ -8,13 +8,13 @@
  * Time: 12:19
  */
 
-session_start();
+/*session_start();
 function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';
-}
+}*/
 
 
-$auth = \Controllers\UserController::isAuth();
+//$auth = \Controllers\UserController::isAuth();
 if (!$auth) {
   header('location: /auth');
   exit();
@@ -32,9 +32,9 @@ if (!empty($_POST) AND isset($_POST['exit'])) {
 
  $content = \Core\Tmp::renderHtml('Views/account_v.php');
 
-$html = \Core\Tmp::renderHtml('Views/main_v.php', [
+/*$html = \Core\Tmp::renderHtml('Views/main_v.php', [
      'content' => $content,
    'title' => 'account'
  ]);
 
-echo $html;
+echo $html;*/
