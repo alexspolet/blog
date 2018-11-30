@@ -9,8 +9,6 @@
 namespace Controllers;
 
 
-use Core\Tmp;
-
 class PageController extends BaseController
 {
 

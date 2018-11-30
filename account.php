@@ -14,7 +14,7 @@ function __autoload($name){
 }
 
 
-$auth = \Core\Users::isAuth();
+$auth = \Controllers\UserController::isAuth();
 if (!$auth) {
   header('location: auth.php');
   exit();

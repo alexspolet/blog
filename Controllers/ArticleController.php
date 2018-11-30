@@ -8,11 +8,9 @@
 
 namespace Controllers;
 
-use Core\App;
 use Core\Request;
 use Models\ArticleModel;
 use Core\Tmp;
-use Controllers\PageController;
 
 class ArticleController extends BaseController
 {
@@ -55,7 +53,6 @@ class ArticleController extends BaseController
       exit();
     }
 
-
     $title = '';
     $text = '';
     $errors = [];
@@ -81,8 +78,8 @@ class ArticleController extends BaseController
         $res = $mArticle->add( ['title' => $title, 'text' => $text]);
         if (!$res) {
           $errors[] = 'Error. We cannot add article to the db';
-
         }
+        
         header("location: /article?id=$res");
       }
     }

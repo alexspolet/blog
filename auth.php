@@ -14,7 +14,7 @@ function __autoload($name){
 
 $accountFile = './account.php';
 $error = '';
-$auth = \Core\Users::isAuth();
+$auth = \Controllers\UserController::isAuth();
 if ($auth) {
   header("location: $accountFile");
   exit();

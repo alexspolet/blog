@@ -27,21 +27,12 @@ Class UserModel extends BaseModel
     $this->pk = 'id';
   }
 
-  public function add($login, $pass)
-  {
-    $query = "INSERT INTO {$this->table} (login, pass) VALUES (?, ?)";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute([$login, $pass]);
-    $res = $this->db->lastInsertId();
-    return $res;
+  public function logIn(){
+
   }
 
-  public function edit($id, $login, $pass)
-  {
-    $query = "UPDATE {$this->table} SET login=?, pass=? WHERE {$this->pk}=?";
-    $stmt = $this->db->prepare($query);
-    $res = $stmt->execute([$login, $pass, $id]);
-    return $res;
+  public function logOut(){
+    
   }
 
 }

@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: alex
- * Date: 27.11.18
- * Time: 18:42
+ * Date: 30.11.18
+ * Time: 12:51
  */
 
-namespace Core;
+namespace Controllers;
 
 
-class Users
+class UserController extends BaseController
 {
   public static function isAuth(){
     if (!(isset($_SESSION['auth']) AND $_SESSION['auth'])){

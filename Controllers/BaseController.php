@@ -8,9 +8,7 @@
 
 namespace Controllers;
 
-use Core\App;
 use Core\Tmp;
-use Core\Users;
 use Core\Request;
 
 class BaseController
@@ -23,7 +21,7 @@ class BaseController
   public function __construct(Request $request)
   {
     $this->title = 'My blog';
-    $this->auth = Users::isAuth();
+    $this->auth = UserController::isAuth();
     $this->request = $request;
   }
 
