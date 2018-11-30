@@ -8,8 +8,6 @@
 
 namespace Models;
 
-
-use Core\Db;
 use Core\SQL;
 
 abstract class BaseModel
@@ -20,7 +18,7 @@ abstract class BaseModel
 
   public function __construct()
   {
-    $this->db = Db::getInstance();
+    $this->db = SQL::getInstance();
   }
 
   public function getAll()

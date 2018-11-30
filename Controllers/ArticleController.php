@@ -49,8 +49,7 @@ class ArticleController extends BaseController
   public function addAction(){
 
     if (!$this->auth) {
-      header('location: /auth');
-      exit();
+      $this->getRedirect('/auth');
     }
 
     $title = '';
@@ -80,7 +79,7 @@ class ArticleController extends BaseController
           $errors[] = 'Error. We cannot add article to the db';
         }
 
-        header("location: /article?id=$res");
+        $this->getRedirect("/article?id=$res");
       }
     }
 
@@ -94,8 +93,7 @@ class ArticleController extends BaseController
 
   public function editAction(){
     if (!$this->auth){
-      header('location: /auth');
-      exit();
+      $this->getRedirect('/auth');
     }
 
     $errors = [];
@@ -127,8 +125,7 @@ class ArticleController extends BaseController
         if (!$errors) {
           $res = $mArticle->edit(['title' => $title, 'text' => $text] , "id = $id");
           if ($res){
-            header("location: /article?id=$id");
-            exit();
+            $this->getRedirect("/article?id=$id");
           }else{
             $errors[] = 'Error. Cannot edit the article';
           }
@@ -147,8 +144,7 @@ class ArticleController extends BaseController
 
   public function deleteAction(){
     if (!$this->auth) {
-      header('location: /');
-      exit();
+      $this->getRedirect('/');
     }
 
     $get = $this->request->getGet();

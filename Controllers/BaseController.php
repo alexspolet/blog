@@ -55,8 +55,9 @@ class BaseController
     return $res;
   }
 
-  protected function getRedirect(){
-
+  protected function getRedirect($url){
+header("location: $url");
+die;
   }
 
 }

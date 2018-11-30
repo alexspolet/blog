@@ -27,8 +27,8 @@ class UserController extends BaseController
     $error = '';
     $auth = UserController::isAuth();
     if ($auth) {
-      header('location: /account');
-      exit();
+      $this->getRedirect('location: /account');
+
     }
     $login = '';
     $pass = '';
@@ -49,8 +49,7 @@ class UserController extends BaseController
           setcookie('login', $login, time() + 3600 * 24);
           setcookie('pass', md5($pass), time() + 3600 * 24);
         }
-        header('location: /account');
-        exit();
+        $this->getRedirect('/account');
       } else {
         $error = 'Invalid error or password';
       }
@@ -68,8 +67,7 @@ class UserController extends BaseController
 
   public function accountAction(){
     if (!$this->auth) {
-      header('location: /auth');
-      exit();
+      $this->getRedirect('/auth');
     }
 
     if ($this->request->isPost() AND isset($this->request->getPost()['exit'])) {
@@ -78,8 +76,7 @@ class UserController extends BaseController
       setcookie('login', 'admin', time() - 1);
       setcookie('pass', md5('123456'), time() - 1);
 
-      header('location: /');
-      exit();
+      $this->getRedirect('/');
     }
 
     $this->content = self::generateInnerTemplate('Views/account_v.php');
