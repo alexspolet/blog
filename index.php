@@ -7,7 +7,7 @@
  */
 session_start();
 
-//TODO We should do auth.php . account.php
+include_once 'settings.php';
 
 function __autoload($name){
   require_once str_replace('\\' , DIRECTORY_SEPARATOR , $name). '.php';

@@ -24,7 +24,7 @@ class SQL
   private function __construct()
   {
     setlocale(LC_ALL, 'ru_Ru.UTF8');
-    $this->db = new \PDO('mysql:host=localhost;dbname=blog', 'admin', '123456');
+    $this->db = new \PDO(DBMS . ':host=' . DB_HOST . ';dbname='. DB_NAME, DB_USER,  DB_PASS);
     $this->db->exec('SET NAMES UTF8');
     $this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE , \PDO::FETCH_ASSOC);
   }
