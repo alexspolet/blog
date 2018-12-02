@@ -19,8 +19,7 @@ class ArticleController extends BaseController
     $mArticle = ArticleModel::getInstance();
     $articles = $mArticle->getAll();
 
-    $path = Tmp::getPath(new Request($_POST , $_SERVER));
-    $this->content = self::generateInnerTemplate($path, [
+    $this->content = self::generateInnerTemplate('Views/index_v.php', [
         'articles' => $articles,
         'auth' => $this->auth
     ]);
@@ -80,11 +79,11 @@ class ArticleController extends BaseController
           $errors[] = 'Error. We cannot add article to the db';
         }
 
-        $this->getRedirect("/article?id=$res");
+        $this->getRedirect("/article/$res");
       }
     }
 
-    $this->content = self::generateInnerTemplate('Views/add.php', [
+    $this->content = self::generateInnerTemplate('Views/add_v.php', [
         'title' => $title,
         'text' => $text,
         'errors' => $errors
@@ -125,7 +124,7 @@ class ArticleController extends BaseController
         if (!$errors) {
           $res = $mArticle->edit(['title' => $title, 'text' => $text] , "id = $id");
           if ($res){
-            $this->getRedirect("/article?id=$id");
+            $this->getRedirect("/article/$id");
           }else{
             $errors[] = 'Error. Cannot edit the article';
           }
