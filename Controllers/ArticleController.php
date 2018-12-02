@@ -8,7 +8,6 @@
 
 namespace Controllers;
 
-use Core\Request;
 use Models\ArticleModel;
 use Core\Tmp;
 
