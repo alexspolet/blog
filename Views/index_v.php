@@ -7,11 +7,11 @@
 
 <?foreach ($articles as $item) :?>
 <p>
-    <a href="/article?id=<?=$item['id']?>"><?=$item['title']?></a>
+    <a href="/article/<?=$item['id']?>"><?=$item['title']?></a>
 
   <?if ($auth):?>
-    <a href="/edit?id=<?=$item['id']?>">Edit</a>
-    <a href="/delete?id=<?=$item['id']?>">Delete</a>
+    <a href="/edit/<?=$item['id']?>">Edit</a>
+    <a href="/delete/<?=$item['id']?>">Delete</a>
 
   <?endif;?>
 </p>

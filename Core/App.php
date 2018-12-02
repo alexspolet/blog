@@ -44,8 +44,40 @@ class App
 
   private function getRouteByRequest()
   {
+    $routesStart = substr($this->request->getRoute(), 1);
+   $routeArr = explode('/' , $routesStart);
+    $id = false;
+
+    foreach ($routeArr as $key => $item){
+      if (is_numeric($item)){
+        $id = $item;
+        $item = 'int';
+
+      }
+      $routeArr[$key] = $item;
+    }
 
 
-    return isset($this->routes[$this->request->getRoute()]) ? $this->routes[$this->request->getRoute()] : false;
+
+    if (!$id){
+      return isset($this->routes[$this->request->getRoute()]) ? $this->routes[$this->request->getRoute()] : false;
+    }
+
+    $routePattern = '/' . implode('/' , $routeArr);
+    $routePatterns = [];
+    foreach ($this->routes as $key => $route) {
+      if (stripos($key , 'int')){
+        $routePatterns[] = $key;
+      }
+    }
+
+    if (!in_array($routePattern , $routePatterns)){
+      return false;
+    }
+
+    $params = $this->routes[$routePattern];
+    $this->request->setGet($params['params']['int'] , $id) ;
+
+return $params;
   }
 }

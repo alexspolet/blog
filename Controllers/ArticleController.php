@@ -38,8 +38,9 @@ class ArticleController extends BaseController
     if (!$article) {
       $this->page404Action();
     }
-    $path = Tmp::getPath($this->request);
-    $this->content = self::generateInnerTemplate($path, [
+
+
+    $this->content = self::generateInnerTemplate('Views/article_v.php', [
         'article' => $article,
         'auth' => $this->auth,
     ]);
@@ -83,8 +84,7 @@ class ArticleController extends BaseController
       }
     }
 
-    $path = Tmp::getPath($this->request);
-    $this->content = self::generateInnerTemplate($path, [
+    $this->content = self::generateInnerTemplate('Views/add.php', [
         'title' => $title,
         'text' => $text,
         'errors' => $errors
@@ -133,8 +133,8 @@ class ArticleController extends BaseController
       }
     }
 
-    $path = Tmp::getPath($this->request);
-    $this->content = self::generateInnerTemplate($path, [
+
+    $this->content = self::generateInnerTemplate('Views/edit_v.php', [
         'id' => $id,
         'title' => $title,
         'text' => $text,
@@ -148,6 +148,7 @@ class ArticleController extends BaseController
     }
 
     $get = $this->request->getGet();
+
     if(!isset($get['id'])){
       $this->page404Action();
     }
@@ -166,8 +167,7 @@ class ArticleController extends BaseController
         $errors[] = 'Cannot delete this article';
     }
 
-    $path = Tmp::getPath($this->request);
-    $this->content = self::generateInnerTemplate($path, [
+    $this->content = self::generateInnerTemplate('Views/delete_v.php', [
         'errors' => $errors
     ]);
 

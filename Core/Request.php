@@ -100,4 +100,14 @@ class Request
   }
 
 
+  public function setGet($name,$value)
+  {
+    $this->get[$name] = $value;
+  }
+
+
+
+
+
+
 }

@@ -38,7 +38,7 @@ class BaseController
     ]);
   }
 
-  protected function page404Action()
+  public function page404Action()
   {
     $this->title = '404. Page not found';
     $path = 'Views/404Page_v.php';

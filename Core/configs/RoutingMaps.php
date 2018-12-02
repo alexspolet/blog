@@ -12,35 +12,47 @@ return
             'controller' => 'Controllers\ArticleController',
             'action' => 'indexAction'
         ],
-        '/article' =>
+        '/article/int' =>
             [
                 'controller' => 'Controllers\ArticleController',
-                'action' => 'articleAction'
+                'action' => 'articleAction',
+                'params' =>
+                    [
+                      'int' => 'id'
+                    ]
             ],
         '/add' =>
             [
                 'controller' => 'Controllers\ArticleController',
                 'action' => 'addAction'
             ],
-        '/edit' =>
+        '/edit/int' =>
             [
                 'controller' => 'Controllers\ArticleController',
-                'action' => 'editAction'
+                'action' => 'editAction',
+                'params' =>
+                    [
+                        'int' => 'id'
+                    ]
             ],
-        '/delete' =>
+        '/delete/int' =>
             [
                 'controller' => 'Controllers\ArticleController',
-                'action' => 'deleteAction'
+                'action' => 'deleteAction',
+                'params' =>
+                    [
+                        'int' => 'id'
+                    ]
             ],
         '/auth' =>
             [
-                'controller' =>'Controllers\UserController',
+                'controller' => 'Controllers\UserController',
                 'action' => 'authAction'
             ],
 
         '/account' =>
             [
-                'controller' =>'Controllers\UserController',
+                'controller' => 'Controllers\UserController',
                 'action' => 'accountAction'
             ]
     ];
