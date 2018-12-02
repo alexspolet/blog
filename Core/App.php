@@ -22,7 +22,7 @@ class App
   public function __construct(Request $request)
   {
     $this->request = $request;
-    $this->routes = include_once ROOT . '/Core/configs/RoutingMaps.php';
+    $this->routes = include_once ROOT . '/Core/configs/routingMaps.php';
   }
 
   public function goApp()
