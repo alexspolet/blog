@@ -85,11 +85,15 @@ class UserController extends BaseController
       $this->getRedirect('/auth');
     }
 
+    $user_id = $_SESSION['user']['id'];
+
+    $user = UserModel::getInstance()->get($user_id , ['id' =>":$user_id"])['login'];
+
     if ($this->request->isPost() AND isset($this->request->getPost()['exit'])) {
       $this->logoutAction();
     }
 
-    $this->content = self::generateInnerTemplate('Views/account_v.php');
+    $this->content = self::generateInnerTemplate('Views/account_v.php' , ['user' => $user]);
   }
 
   private function logoutAction()

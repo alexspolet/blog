@@ -32,7 +32,7 @@ Class UserModel extends BaseModel
 
   function getUserId($login , $pass)
   {
-    return SQL::getInstance()->selectOne("SELECT {$this->pk} FROM {$this->table} WHERE  login = '$login' AND pass = '$pass'");
+    return SQL::getInstance()->selectOne("SELECT {$this->pk} FROM {$this->table} WHERE  login = '$login' AND pass = '$pass'" , ['login' => ":$login" , 'pass' => ":$pass"]);
   }
   public function logIn(){
 

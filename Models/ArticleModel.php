@@ -31,6 +31,6 @@ Class ArticleModel extends BaseModel
   public function getAuthor($id){
     return SQL::getInstance()->selectOne("SELECT users.login FROM {$this->table}
     LEFT JOIN users ON {$this->table}.id_user = users.id 
- WHERE   {$this->table}.id = '$id'");
+ WHERE   {$this->table}.id = '$id'" ,  ['id' => ":$id"]);
   }
 }

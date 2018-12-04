@@ -29,9 +29,9 @@ class SQL
     $this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE , \PDO::FETCH_ASSOC);
   }
 
-  public function query($query){
+  public function query($query, array $params = []){
     $stmt = $this->db->prepare($query);
-    $stmt->execute();
+    $stmt->execute($params);
 
     if ($stmt->errorCode() !== \PDO::ERR_NONE){
       die($stmt->errorInfo()[2]);
@@ -39,9 +39,9 @@ class SQL
     return $stmt->fetchAll();
   }
 
-  public function selectOne($query){
+  public function selectOne($query, array $params = []){
     $stmt = $this->db->prepare($query);
-    $stmt->execute();
+    $stmt->execute($params);
 
     if ($stmt->errorCode() !== \PDO::ERR_NONE){
       die($stmt->errorInfo()[2]);
