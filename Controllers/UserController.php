@@ -11,9 +11,11 @@ namespace Controllers;
 
 use Core\Tmp;
 use Core\Validator;
+use Models\UserModel;
 
 class UserController extends BaseController
 {
+
   public static function isAuth()
   {
     if (!(isset($_SESSION['auth']) AND $_SESSION['auth'])) {
@@ -24,6 +26,7 @@ class UserController extends BaseController
     }
     return true;
   }
+
 
   public function authAction()
   {
@@ -49,9 +52,12 @@ class UserController extends BaseController
           $setCookie = 'checked="checked"';
         }
 
-        if ($login === 'admin' AND md5($pass) === md5('123456')) {
+        $user = UserModel::getInstance()->getUserId($login , md5($pass));
+
+        if ($user) {
           $_SESSION['auth'] = true;
           $_SESSION['pass'] = md5($pass);
+          $_SESSION['user'] = $user;
           if ($setCookie) {
             setcookie('login', $login, time() + 3600 * 24);
             setcookie('pass', md5($pass), time() + 3600 * 24);

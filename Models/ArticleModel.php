@@ -8,6 +8,8 @@
 
 namespace Models;
 
+use Core\SQL;
+
 Class ArticleModel extends BaseModel
 {
   private static $instance;
@@ -24,5 +26,11 @@ Class ArticleModel extends BaseModel
     parent::__construct();
     $this->table = 'articles';
     $this->pk = 'id';
+  }
+
+  public function getAuthor($id){
+    return SQL::getInstance()->selectOne("SELECT users.login FROM {$this->table}
+    LEFT JOIN users ON {$this->table}.id_user = users.id 
+ WHERE   {$this->table}.id = '$id'");
   }
 }

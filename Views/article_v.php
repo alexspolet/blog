@@ -1,6 +1,8 @@
 <? if ($article): ?>
     <h1><?= $article['title'] ?></h1>
+    <h4>Author: <?=$author?></h4>
     <div class="text"><?= $article['text'] ?></div>
+
 <? endif; ?>
 <? if ($auth): ?>
     <p>

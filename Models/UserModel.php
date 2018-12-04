@@ -8,6 +8,9 @@
 
 namespace Models;
 
+
+use Core\SQL;
+
 Class UserModel extends BaseModel
 {
 
@@ -23,10 +26,14 @@ Class UserModel extends BaseModel
   public function __construct()
   {
     parent::__construct();
-    $this->table = 'user';
+    $this->table = 'users';
     $this->pk = 'id';
   }
 
+  function getUserId($login , $pass)
+  {
+    return SQL::getInstance()->selectOne("SELECT {$this->pk} FROM {$this->table} WHERE  login = '$login' AND pass = '$pass'");
+  }
   public function logIn(){
 
   }
@@ -34,5 +41,6 @@ Class UserModel extends BaseModel
   public function logOut(){
     
   }
+
 
 }

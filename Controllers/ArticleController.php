@@ -32,7 +32,7 @@ class ArticleController extends BaseController
     }
     $id = $get['id'];
     $article = ArticleModel::getInstance()->get($id);
-
+    $author = ArticleModel::getInstance()->getAuthor($id)['login'];
     if (!$article) {
       $this->page404Action();
     }
@@ -41,6 +41,7 @@ class ArticleController extends BaseController
     $this->content = self::generateInnerTemplate('Views/article_v.php', [
         'article' => $article,
         'auth' => $this->auth,
+        'author' => $author,
     ]);
 
   }
@@ -73,7 +74,8 @@ class ArticleController extends BaseController
 
       if (!$errors) {
 
-        $res = $mArticle->add( ['title' => $title, 'text' => $text]);
+        //$res = $mArticle->add( ['title' => $title, 'text' => $text]);
+        $res = $mArticle->add( ['title' => $title, 'text' => $text , 'id_user' => $_SESSION['user']['id']]);
         if (!$res) {
           $errors[] = 'Error. We cannot add article to the db';
         }

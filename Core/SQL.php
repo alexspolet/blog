@@ -14,7 +14,7 @@ class SQL
   private $db;
   private static $instance;
 
-  public function getInstance(){
+  public static function getInstance(){
     if (self::$instance == null){
       self::$instance = new SQL();
     }
@@ -37,7 +37,16 @@ class SQL
       die($stmt->errorInfo()[2]);
     }
     return $stmt->fetchAll();
+  }
 
+  public function selectOne($query){
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+
+    if ($stmt->errorCode() !== \PDO::ERR_NONE){
+      die($stmt->errorInfo()[2]);
+    }
+    return $stmt->fetch();
   }
 
   /**
@@ -109,5 +118,4 @@ class SQL
     }
     return $res;
   }
-
 }
