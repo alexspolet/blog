@@ -26,9 +26,9 @@ abstract class BaseModel
     return SQL::getInstance()->query("SELECT * FROM {$this->table}");
   }
 
-  public function get($id ,array $params = [])
+  public function get($params)
   {
-    return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$this->pk} = {$id}" , $params)[0];
+    return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$this->pk} = :id" , $params)[0];
   }
 
   public function add(array $object)

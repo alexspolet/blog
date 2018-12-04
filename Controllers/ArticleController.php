@@ -32,8 +32,8 @@ class ArticleController extends BaseController
     }
     $id = $get['id'];
     $mArticle = ArticleModel::getInstance();
-    $article = $mArticle->get($id , ['id' => ":$id"]);
-    $author = ArticleModel::getInstance()->getAuthor($id)['login'];
+    $article = $mArticle->get(['id' => "$id"]);
+    $author = ArticleModel::getInstance()->getAuthor(['id' => $id])['login'];
     if (!$article) {
       $this->page404Action();
     }
@@ -104,7 +104,7 @@ class ArticleController extends BaseController
     $id = $get['id'];
 
     $mArticle = ArticleModel::getInstance();
-    $article = $mArticle->get($id , ['id' => ":$id"]);
+    $article = $mArticle->get(['id' => "$id"]);
 
     if (!$article){
       $this->page404Action();
@@ -156,7 +156,7 @@ class ArticleController extends BaseController
     $errors = [];
 
     $mArticle = ArticleModel::getInstance();
-    $article = $mArticle->get($id , ['id' => ":$id"]);
+    $article = $mArticle->get(['id' => "$id"]);
 
     if (!$article) {
       $this->page404Action();

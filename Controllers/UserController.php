@@ -52,11 +52,10 @@ class UserController extends BaseController
           $setCookie = 'checked="checked"';
         }
 
-        $user = UserModel::getInstance()->getUserId($login , md5($pass));
-
+        $user = UserModel::getInstance()->getUserId(['login' => "$login" , 'pass' => md5($pass)]);
+        var_dump($user);
         if ($user) {
           $_SESSION['auth'] = true;
-          $_SESSION['pass'] = md5($pass);
           $_SESSION['user'] = $user;
           if ($setCookie) {
             setcookie('login', $login, time() + 3600 * 24);
@@ -87,7 +86,7 @@ class UserController extends BaseController
 
     $user_id = $_SESSION['user']['id'];
 
-    $user = UserModel::getInstance()->get($user_id , ['id' =>":$user_id"])['login'];
+    $user = UserModel::getInstance()->get(['id' => $user_id])['login'];
 
     if ($this->request->isPost() AND isset($this->request->getPost()['exit'])) {
       $this->logoutAction();

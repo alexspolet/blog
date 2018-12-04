@@ -28,9 +28,9 @@ Class ArticleModel extends BaseModel
     $this->pk = 'id';
   }
 
-  public function getAuthor($id){
+  public function getAuthor($params){
     return SQL::getInstance()->selectOne("SELECT users.login FROM {$this->table}
     LEFT JOIN users ON {$this->table}.id_user = users.id 
- WHERE   {$this->table}.id = '$id'" ,  ['id' => ":$id"]);
+ WHERE   {$this->table}.id = :id" ,  $params);
   }
 }
