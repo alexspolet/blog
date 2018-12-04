@@ -44,7 +44,10 @@ class Request
       foreach ($arr as $item) {
         $last_buffer = explode('=', $item);
         if (isset( $last_buffer[1])){
-          $get[$last_buffer[0]] = $last_buffer[1];
+          $key = $last_buffer[0];
+          unset($last_buffer[0]);
+          $last_buffer = implode('=' , $last_buffer);
+          $get[$key] = $last_buffer;
         }
 
       }
