@@ -28,6 +28,8 @@ class UserController extends BaseController
   }
 
 
+
+
   public function authAction()
   {
     $auth = UserController::isAuth();
@@ -53,7 +55,6 @@ class UserController extends BaseController
         }
 
         $user = UserModel::getInstance()->getUserId(['login' => "$login" , 'pass' => md5($pass)]);
-        var_dump($user);
         if ($user) {
           $_SESSION['auth'] = true;
           $_SESSION['user'] = $user;
