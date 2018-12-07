@@ -48,15 +48,14 @@ class UserController extends BaseController
 
         return true;*/
 
-            //TODO надо бы подумать как сделать класс более читабельным и
+        //TODO надо бы подумать как сделать класс более читабельным и
         // возможно разнести по подклассам
-        if (!(SessionModel::has('token'))) {//If we haven't session
+        if (!(SessionModel::has('user_id') AND SessionModel::has('token'))) {//If we haven't session
             if (!(isset($_COOKIE['login']) AND isset($_COOKIE['pass']) AND UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]))) {//we haven't cookie
                 return false;
             }
             $token = SessionModel::generateToken();
             $user = UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]);
-            var_dump($user);
             if (SessionModel::getInstance()->getToken(['user_id' =>
                 $user['id']])) {
                 SessionModel::getInstance()->edit(['user_id' => $user['id'], 'token' => $token], "user_id = {$user['id']} ");
@@ -73,9 +72,9 @@ class UserController extends BaseController
                 SessionModel::read('user_id')])['user_id']) {//we haven't note
                 // in db
                 if (!(isset($_COOKIE['login']) AND isset($_COOKIE['pass']) AND UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]))) {// we haven't cookie
-                    if (SessionModel::has('token') )
-                    SessionModel::remove(['token']);
-                    if (SessionModel::has('user_id')){
+                    if (SessionModel::has('token'))
+                        SessionModel::remove(['token']);
+                    if (SessionModel::has('user_id')) {
                         SessionModel::remove('user_id');
                     }
                     return false;
@@ -165,7 +164,7 @@ class UserController extends BaseController
         if (!$this->auth) {
             $this->getRedirect('/auth');
         }
-        $user_id = $_SESSION['user_id'];
+        $user_id = SessionModel::read('user_id');
 
         $user = UserModel::getInstance()->get(['id' => $user_id])['login'];
 
@@ -180,7 +179,12 @@ class UserController extends BaseController
     {
         $user_id = SessionModel::read('user_id');
         SessionModel::getInstance()->delete($user_id);
-        SessionModel::deleteAll(['user_id', 'token']);
+        if (SessionModel::has('user_id')) {
+            SessionModel::remove('user_id');
+        }
+        if (SessionModel::has('token')) {
+            SessionModel::remove('token');
+        }
         setcookie('login', 'admin', time() - 1);
         setcookie('pass', md5('123456'), time() - 1);
 

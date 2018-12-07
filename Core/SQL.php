@@ -30,8 +30,6 @@ class SQL
   }
 
   public function query($query, array $params = []){
-      var_dump($query);
-      var_dump($params);
     $stmt = $this->db->prepare($query);
     $stmt->execute($params);
 
@@ -42,8 +40,6 @@ class SQL
   }
 
   public function selectOne($query, array $params = []){
-      var_dump($query);
-      var_dump($params);
     $stmt = $this->db->prepare($query);
     $stmt->execute($params);
 
