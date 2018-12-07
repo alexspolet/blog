@@ -30,6 +30,8 @@ class SQL
   }
 
   public function query($query, array $params = []){
+      var_dump($query);
+      var_dump($params);
     $stmt = $this->db->prepare($query);
     $stmt->execute($params);
 
@@ -40,6 +42,8 @@ class SQL
   }
 
   public function selectOne($query, array $params = []){
+      var_dump($query);
+      var_dump($params);
     $stmt = $this->db->prepare($query);
     $stmt->execute($params);
 
@@ -96,8 +100,6 @@ class SQL
     }
       $string = substr($string , 0 , -2);
     $query = "UPDATE {$table} SET {$string} WHERE {$where}";
-
-
     $stmt = $this->db->prepare($query);
     $res = $stmt->execute($object);
 

@@ -40,9 +40,9 @@ abstract class BaseModel
     return SQL::getInstance()->update($this->table , $object , $where);
   }
 
-  public function delete($id)
+  public function delete($pk)
   {
-    return SQL::getInstance()->delete($this->table , "$this->pk = $id");
+    return SQL::getInstance()->delete($this->table , "$this->pk = $pk");
   }
 
 }
