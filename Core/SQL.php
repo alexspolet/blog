@@ -109,6 +109,7 @@ class SQL
 
   public function delete($table , $params){
       $patch = '';
+      var_dump($params);
       foreach ($params as $key => $param){
           $patch .= " $key = :$key";
       }

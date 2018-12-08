@@ -68,10 +68,11 @@ class SessionModel extends BaseModel
     return $token = md5(time());
   }
 
-  public function delete($user_id)
-  {
-    return SQL::getInstance()->delete($this->table , "user_id = $user_id");
-  }
+      /*public function delete($user_id)
+      {
+          return $this->delete()
+        //return SQL::getInstance()->delete($this->table , "user_id = $user_id");
+      }*/
 
   public function getToken($params)
   {

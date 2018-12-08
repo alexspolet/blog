@@ -63,21 +63,47 @@ class PrivilegedUserModel extends UserModel
         return array_key_exists($role, $this->roles);
     }
 
-    public function addRole($role)
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    /*public function addRole($role)
     {
         if (!$this->hasRole($role)) {
             SQL::getInstance()->insert($this->table, ['id_user' =>
                 $this->fields['id'], 'role' => $role]);
         }
 
+    }*/
+
+    public function addRole($id_user, $role)
+    {
+        if ($this->isAdmin()){
+            if (!$this->hasRole($role)) {
+                SQL::getInstance()->insert($this->table, ['id_user' =>
+                    $id_user, 'role' => $role]);
+            }
+        }
     }
 
-    public function deleteRole($role)
+    public function deleteRole($id_user, $role)
+    {
+        if ($this->isAdmin()) {
+            if ($this->hasRole($role)) {
+                $this->delete(['id_user' => $id_user , 'role' => $role]);
+            }
+        }
+    }
+
+
+    /*public function deleteRole($role)
     {
         if ($this->hasRole($role)) {
             $this->delete(['role' => $role]);
         }
-    }
+    }*/
+
 
 
 

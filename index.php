@@ -28,6 +28,4 @@ $somePrivUser = \Models\AdminModel::getInstance()->getById(['id' =>
 var_dump($somePrivUser->isAdmin());
 
 
-var_dump($somePrivUser);
-
 

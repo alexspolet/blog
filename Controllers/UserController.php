@@ -146,7 +146,7 @@ class UserController extends BaseController
     private function logoutAction()
     {
         $user_id = SessionModel::read('user_id');
-        SessionModel::getInstance()->delete($user_id);
+        SessionModel::getInstance()->delete(['user_id' => $user_id]);
         if (SessionModel::has('user_id')) {
             SessionModel::remove('user_id');
         }

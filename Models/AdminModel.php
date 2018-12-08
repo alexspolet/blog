@@ -39,4 +39,13 @@ class AdminModel extends PrivilegedUserModel
         return $this->admin;
     }
 
+
+    public function addRole(){
+        if ($this->isAdmin()){
+
+        }
+    }
+
+
+
 }
