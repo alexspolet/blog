@@ -14,6 +14,8 @@ use Core\SQL;
 Class UserModel extends BaseModel
 {
 
+    public $fields;
+
   private static $instance;
 
   public static function getInstance(){
@@ -28,19 +30,19 @@ Class UserModel extends BaseModel
     parent::__construct();
     $this->table = 'users';
     $this->pk = 'id';
+    $this->fields = [];
   }
 
   function getUserId($params)
   {
     return SQL::getInstance()->selectOne("SELECT {$this->pk} FROM {$this->table} WHERE  login = :login AND pass = :pass" , $params);
   }
-  public function logIn(){
 
+    public function getById($params){
+        $fields =  SQL::getInstance()->selectOne("SELECT * FROM {$this->table} WHERE {$this->pk} = :{$this->pk}" , $params);
+        foreach ($fields as $key => $field) {
+            $this->fields[$key] = $field;
+        }
+        return $this;
   }
-
-  public function logOut(){
-    
-  }
-
-
 }

@@ -18,36 +18,6 @@ class UserController extends BaseController
 
     public static function isAuth()
     {
-
-        /*if (!(SessionModel::has('token'))) {
-
-          if (!(isset($_COOKIE['login']) AND isset($_COOKIE['pass']) AND UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]))) {
-            return false;
-
-          }
-
-          $token = SessionModel::generateToken();
-          $user = UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]);
-          SessionModel::getInstance()->edit(['user_id' => $user['id'], 'token' => $token] , "user_id = {$user['id']} ");
-          SessionModel::push('token', $token);
-        }
-
-
-        if (!SessionModel::getInstance()->getToken(['token' => SessionModel::read('token')])['token']){
-          if (!(isset($_COOKIE['login']) AND isset($_COOKIE['pass']) AND UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]))) {
-            return false;
-
-          }
-
-          $token = SessionModel::generateToken();
-          $user = UserModel::getInstance()->getUserId(['login' => $_COOKIE['login'], 'pass' => $_COOKIE['pass']]);
-          SessionModel::getInstance()->edit(['user_id' => $user['id'], 'token' => $token] , "user_id = {$user['id']} ");
-          SessionModel::push('token', $token);
-
-        }
-
-        return true;*/
-
         //TODO надо бы подумать как сделать класс более читабельным и
         // возможно разнести по подклассам
         if (!(SessionModel::has('user_id') AND SessionModel::has('token'))) {//If we haven't session

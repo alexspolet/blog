@@ -7,11 +7,6 @@
  */
 session_start();
 
-
-var_dump($_SESSION);
-var_dump($_COOKIE);
-
-
 include_once 'settings.php';
 
 function __autoload($name){
@@ -22,5 +17,10 @@ function __autoload($name){
 $app = new \Core\App(new \Core\Request($_POST , $_SERVER));
 $app->goApp();
 
-var_dump($_SESSION);
-var_dump($_COOKIE);
+/*$admin = \Models\RoleModel::getInstance()->getPermissions(['role' =>
+    'admin']);
+
+var_dump($admin->permissions);*/
+
+$someUser = \Models\UserModel::getInstance()->getById(['id' => 1]);
+var_dump($someUser->fields);
