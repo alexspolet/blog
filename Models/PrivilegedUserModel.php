@@ -44,17 +44,23 @@ class PrivilegedUserModel extends UserModel
 
     public function initRoles($params)
     {
-        $roles = SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE id_user = :id_user", $params);
+
+        $roles = $this->get($params);
+
         foreach ($roles as $key => $role) {
-            $this->roles[] = $role['role'];
-            $this->permissions = RoleModel::getInstance()->getPermissions(['role' => $role['role']]);
+            $this->roles[$role['role']] = true;
+           $permissions = RoleModel::getInstance()->getPermissions(['role' => $role['role']]);
+            foreach ($permissions->permissions as $k => $permission){
+                $this->permissions[$k] = true;
+            }
         }
+
         return $this;
     }
 
-    public function hasRole($privilege)
+    public function hasRole($role)
     {
-        return in_array($privilege, $this->roles);
+        return array_key_exists($role, $this->roles);
     }
 
     public function addRole($role)

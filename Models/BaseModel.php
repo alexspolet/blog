@@ -26,13 +26,21 @@ abstract class BaseModel
     return SQL::getInstance()->query("SELECT * FROM {$this->table}");
   }
 
-  public function get(array $params)
+    public function get(array $params)
+    {
+        $patch = '';
+        foreach ($params as $key => $param){
+            $patch .= " $key = :$key";
+        }
+        return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$patch}" , $params);
+    }
+
+  public function getOne(array $params)
   {
-      $patch = '';
-      foreach ($params as $key => $param){
-          $patch .= " $key = :$key";
+      if (!empty($this->get($params))){
+         return $this->get($params)[0];
       }
-    return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$patch}" , $params)[0];
+      return false;
   }
 
   public function add(array $object)

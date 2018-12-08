@@ -9,9 +9,9 @@
 namespace Models;
 
 
-/*class AdminModel extends PrivilegedUserModel
+class AdminModel extends PrivilegedUserModel
 {
-    private $admin = false;
+     private $admin;
     private static $instance;
 
     public static function getInstance()
@@ -26,18 +26,17 @@ namespace Models;
     public function __construct()
     {
         parent::__construct();
-        if ($this->hasRole('admin')){
-            var_dump($this->roles);
-            $this->admin = true;
-        }
+        $this->admin = false;
 
     }
 
 
-
     public function isAdmin()
     {
+        if ($this->hasRole('admin')){
+            $this->admin = true;
+        }
         return $this->admin;
-}
+    }
 
-}*/
+}

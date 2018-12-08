@@ -135,9 +135,7 @@ class UserController extends BaseController
             $this->getRedirect('/auth');
         }
         $user_id = SessionModel::read('user_id');
-
-        $user = UserModel::getInstance()->get(['id' => $user_id])['login'];
-
+        $user = UserModel::getInstance()->getOne(['id' => $user_id])['login'];
         if ($this->request->isPost() AND isset($this->request->getPost()['exit'])) {
             $this->logoutAction();
         }

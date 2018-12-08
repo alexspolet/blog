@@ -10,6 +10,7 @@ namespace Controllers;
 
 use Models\ArticleModel;
 use Core\Tmp;
+use Models\SessionModel;
 
 class ArticleController extends BaseController
 {
@@ -32,7 +33,7 @@ class ArticleController extends BaseController
     }
     $id = $get['id'];
     $mArticle = ArticleModel::getInstance();
-    $article = $mArticle->get(['id' => "$id"]);
+    $article = $mArticle->getOne(['id' => "$id"]);
     $author = ArticleModel::getInstance()->getAuthor(['id' => $id])['login'];
     if (!$article) {
       $this->page404Action();
@@ -74,7 +75,8 @@ class ArticleController extends BaseController
       }
 
       if (!$errors) {
-        $res = $mArticle->add( ['title' => $title, 'text' => $text , 'id_user' => $_SESSION['user']['id']]);
+          var_dump($_SESSION);
+        $res = $mArticle->add( ['title' => $title, 'text' => $text , 'id_user' => SessionModel::read('user_id')]);
         if (!$res) {
           $errors[] = 'Error. We cannot add article to the db';
         }
@@ -104,10 +106,10 @@ class ArticleController extends BaseController
     $id = $get['id'];
 
     $mArticle = ArticleModel::getInstance();
-    $article = $mArticle->get(['id' => "$id"]);
-
+    $article = $mArticle->getOne(['id' => "$id"]);
     if (!$article){
       $this->page404Action();
+      exit();
     }else{
       $title = $article['title'];
       $text = $article['text'];
@@ -148,15 +150,15 @@ class ArticleController extends BaseController
 
     $get = $this->request->getGet();
 
+
     if(!isset($get['id'])){
       $this->page404Action();
     }
     $id = $get['id'];
-
     $errors = [];
 
     $mArticle = ArticleModel::getInstance();
-    $article = $mArticle->get(['id' => "$id"]);
+    $article = $mArticle->getOne(['id' => "$id"]);
 
     if (!$article) {
       $this->page404Action();

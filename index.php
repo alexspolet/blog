@@ -17,25 +17,17 @@ function __autoload($name){
 $app = new \Core\App(new \Core\Request($_POST , $_SERVER));
 $app->goApp();
 
-/*$admin = \Models\RoleModel::getInstance()->getPermissions(['role' =>
-    'admin']);
 
-var_dump($admin->permissions);*/
+$somePrivUser = \Models\AdminModel::getInstance()->getById(['id' =>
+   2]);
 
 
-/*$somePrivUser = \Models\PrivilegedUserModel::getInstance();
-$somePrivUser->getById(['id' => 2]);
-var_dump($somePrivUser->roles);*/
 
-$somePrivUser = \Models\PrivilegedUserModel::getInstance()->getById(['id' =>
-    2]);
 
-/*var_dump($somePrivUser->roles);
-var_dump($somePrivUser->hasRole('moderator'));*/
 
-/*$somePrivUser->addRole('moderator');
-var_dump($somePrivUser->roles);*/
+var_dump($somePrivUser->isAdmin());
 
-//$somePrivUser->deleteRole('moderator');
-var_dump($somePrivUser->roles);
-var_dump($somePrivUser->permissions);
+
+var_dump($somePrivUser);
+
+

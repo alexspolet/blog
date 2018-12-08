@@ -70,6 +70,8 @@ class SQL
     $masks_all = implode(', ' , $masks);
 
     $query = "INSERT INTO {$table} ({$columns_all}) VALUES ({$masks_all})";
+    var_dump($query);
+    var_dump($object);
     $stmt = $this->db->prepare($query);
     $stmt->execute($object);
 
