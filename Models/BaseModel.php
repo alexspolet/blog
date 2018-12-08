@@ -26,9 +26,13 @@ abstract class BaseModel
     return SQL::getInstance()->query("SELECT * FROM {$this->table}");
   }
 
-  public function get($params)
+  public function get(array $params)
   {
-    return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$this->pk} = :id" , $params)[0];
+      $patch = '';
+      foreach ($params as $key => $param){
+          $patch .= " $key = :$key";
+      }
+    return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$patch}" , $params)[0];
   }
 
   public function add(array $object)
@@ -40,9 +44,9 @@ abstract class BaseModel
     return SQL::getInstance()->update($this->table , $object , $where);
   }
 
-  public function delete($pk)
+  public function delete(array $params )
   {
-    return SQL::getInstance()->delete($this->table , "$this->pk = $pk");
+    return SQL::getInstance()->delete($this->table , $params);
   }
 
 }

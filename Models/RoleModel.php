@@ -21,6 +21,7 @@ class RoleModel extends BaseModel
         parent::__construct();
         $this->table = 'role_permission';
         $this->permissions = [];
+        $this->pk = 'id';
     }
 
 
@@ -34,9 +35,13 @@ class RoleModel extends BaseModel
 
     public function getPermissions($params)
     {
-        $permissions = SQL::getInstance()->query("SELECT permission FROM {$this->table} WHERE role = :role", $params);
-        foreach ($permissions as $permission){
-            $this->permissions[] = $permission['permission'];
+        $patch = '';
+        foreach ($params as $key => $param){
+            $patch .= "$key = :$key";
+        }
+        $permissions = SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$patch}", $params);
+        foreach ($permissions as $key => $permission){
+            $this->permissions[$permission['permission']] = true;
         }
         return $this;
     }

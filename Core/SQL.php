@@ -70,7 +70,6 @@ class SQL
     $masks_all = implode(', ' , $masks);
 
     $query = "INSERT INTO {$table} ({$columns_all}) VALUES ({$masks_all})";
-
     $stmt = $this->db->prepare($query);
     $stmt->execute($object);
 
@@ -106,10 +105,14 @@ class SQL
     return $res;
   }
 
-  public function delete($table , $where){
-    $query = "DELETE FROM {$table} WHERE {$where}";
+  public function delete($table , $params){
+      $patch = '';
+      foreach ($params as $key => $param){
+          $patch .= " $key = :$key";
+      }
+    $query = "DELETE FROM {$table} WHERE {$patch}";
     $stmt = $this->db->prepare($query);
-    $res = $stmt->execute();
+    $res = $stmt->execute($params);
 
     if ($stmt->errorCode() !== \PDO::ERR_NONE ){
       die($stmt->errorInfo()[2]);

@@ -162,7 +162,7 @@ class ArticleController extends BaseController
       $this->page404Action();
 
     }
-      $res = $mArticle->delete( $article['id']);
+      $res = $mArticle->delete(['id' =>$article['id']]);
       if (!$res) {
         $errors[] = 'Cannot delete this article';
     }

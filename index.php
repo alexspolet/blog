@@ -22,5 +22,20 @@ $app->goApp();
 
 var_dump($admin->permissions);*/
 
-$someUser = \Models\UserModel::getInstance()->getById(['id' => 1]);
-var_dump($someUser->fields);
+
+/*$somePrivUser = \Models\PrivilegedUserModel::getInstance();
+$somePrivUser->getById(['id' => 2]);
+var_dump($somePrivUser->roles);*/
+
+$somePrivUser = \Models\PrivilegedUserModel::getInstance()->getById(['id' =>
+    2]);
+
+/*var_dump($somePrivUser->roles);
+var_dump($somePrivUser->hasRole('moderator'));*/
+
+/*$somePrivUser->addRole('moderator');
+var_dump($somePrivUser->roles);*/
+
+//$somePrivUser->deleteRole('moderator');
+var_dump($somePrivUser->roles);
+var_dump($somePrivUser->permissions);
