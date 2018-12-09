@@ -31,20 +31,22 @@ class AdminModel extends PrivilegedUserModel
     }
 
 
-    public function isAdmin()
+    /*public function isAdmin()
     {
         if ($this->hasRole('admin')){
             $this->admin = true;
         }
         return $this->admin;
-    }
+    }*/
 
 
-    public function addRole(){
+
+
+    /*public function addRole(){
         if ($this->isAdmin()){
 
         }
-    }
+    }*/
 
 
 

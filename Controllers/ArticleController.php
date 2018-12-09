@@ -16,6 +16,7 @@ class ArticleController extends BaseController
 {
   public function indexAction()
   {
+      var_dump($_SESSION);
     $mArticle = ArticleModel::getInstance();
     $articles = $mArticle->getAll();
 
@@ -27,6 +28,8 @@ class ArticleController extends BaseController
 
   public function articleAction()
   {
+      var_dump($_SESSION);
+
     $get = $this->request->getGet();
     if(!isset($get['id'])){
       $this->page404Action();
@@ -75,7 +78,6 @@ class ArticleController extends BaseController
       }
 
       if (!$errors) {
-          var_dump($_SESSION);
         $res = $mArticle->add( ['title' => $title, 'text' => $text , 'id_user' => SessionModel::read('user_id')]);
         if (!$res) {
           $errors[] = 'Error. We cannot add article to the db';

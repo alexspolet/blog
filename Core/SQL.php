@@ -30,6 +30,7 @@ class SQL
   }
 
   public function query($query, array $params = []){
+
     $stmt = $this->db->prepare($query);
     $stmt->execute($params);
 
@@ -70,8 +71,6 @@ class SQL
     $masks_all = implode(', ' , $masks);
 
     $query = "INSERT INTO {$table} ({$columns_all}) VALUES ({$masks_all})";
-    var_dump($query);
-    var_dump($object);
     $stmt = $this->db->prepare($query);
     $stmt->execute($object);
 
@@ -109,7 +108,6 @@ class SQL
 
   public function delete($table , $params){
       $patch = '';
-      var_dump($params);
       foreach ($params as $key => $param){
           $patch .= " $key = :$key";
       }

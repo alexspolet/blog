@@ -18,14 +18,14 @@ $app = new \Core\App(new \Core\Request($_POST , $_SERVER));
 $app->goApp();
 
 
-$somePrivUser = \Models\AdminModel::getInstance()->getById(['id' =>
+/*$somePrivUser = \Models\AdminModel::getInstance()->getById(['id' =>
    2]);
 
 
 
 
 
-var_dump($somePrivUser->isAdmin());
+var_dump($somePrivUser->isAdmin());*/
 
 
 

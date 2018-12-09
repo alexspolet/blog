@@ -57,4 +57,8 @@ abstract class BaseModel
     return SQL::getInstance()->delete($this->table , $params);
   }
 
+    public function getByText($column , $params){
+        return SQL::getInstance()->query("SELECT * FROM {$this->table} WHERE {$column} LIKE :word" , $params);
+    }
+
 }

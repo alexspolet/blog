@@ -10,6 +10,8 @@ namespace Controllers;
 
 use Core\Tmp;
 use Core\Validator;
+use Models\PrivilegedUserModel;
+use Models\RoleModel;
 use Models\SessionModel;
 use Models\UserModel;
 
@@ -131,16 +133,34 @@ class UserController extends BaseController
 
     public function accountAction()
     {
+        $roles = [];
         if (!$this->auth) {
-            $this->getRedirect('/auth');
-        }
-        $user_id = SessionModel::read('user_id');
-        $user = UserModel::getInstance()->getOne(['id' => $user_id])['login'];
-        if ($this->request->isPost() AND isset($this->request->getPost()['exit'])) {
-            $this->logoutAction();
+            $user = false;
+        }else{
+            $user_id = SessionModel::read('user_id');
+            $user = PrivilegedUserModel::getInstance()->getById('users' , ['id'
+            => $user_id]);
+
+            if ($user->isAdmin()){
+                $roles[] = 'admin';
+                SessionModel::push('admin' , true);
+            }
+            if ($user->hasRole('moderator')){
+                $roles[] = 'moderator';
+            }
+            if ($user->hasRole('editor')){
+                $roles[] = 'editor';
+            }
+            if ($user->hasRole('user')){
+                $roles[] = 'user';
+            }
+
+            if ($this->request->isPost() AND isset($this->request->getPost()['exit'])) {
+                $this->logoutAction();
+            }
         }
 
-        $this->content = self::generateInnerTemplate('Views/account_v.php', ['user' => $user]);
+        $this->content = self::generateInnerTemplate('Views/account_v.php', ['user' => $user , 'roles' => $roles]);
     }
 
     private function logoutAction()
@@ -152,6 +172,9 @@ class UserController extends BaseController
         }
         if (SessionModel::has('token')) {
             SessionModel::remove('token');
+        }
+        if (SessionModel::has('admin')){
+            SessionModel::remove('admin');
         }
         setcookie('login', 'admin', time() - 1);
         setcookie('pass', md5('123456'), time() - 1);

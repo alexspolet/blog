@@ -49,6 +49,16 @@ return
                 'controller' => 'Controllers\UserController',
                 'action' => 'authAction'
             ],
+        '/admin' =>
+            [
+                'controller' => 'Controllers\AdminController',
+                'action' => 'AdminAction'
+            ],
+        '/admin/addRole' =>
+            [
+                'controller' => 'Controllers\AdminController',
+                'action' => 'addRoleAction'
+            ],
 
         '/account' =>
             [

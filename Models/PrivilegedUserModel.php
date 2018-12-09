@@ -34,9 +34,9 @@ class PrivilegedUserModel extends UserModel
         $this->roles = [];
     }
 
-    public function getById($params)
+    public function getById($table , $params)
     {
-        parent::getById($params);
+        parent::getById($table, $params);
         $this->initRoles(['id_user' => $this->fields['id']]);
 
         return $this;
@@ -44,12 +44,10 @@ class PrivilegedUserModel extends UserModel
 
     public function initRoles($params)
     {
-
         $roles = $this->get($params);
-
         foreach ($roles as $key => $role) {
             $this->roles[$role['role']] = true;
-           $permissions = RoleModel::getInstance()->getPermissions(['role' => $role['role']]);
+           $permissions = RolePermissionModel::getInstance()->getPermissions(['role' => $role['role']]);
             foreach ($permissions->permissions as $k => $permission){
                 $this->permissions[$k] = true;
             }

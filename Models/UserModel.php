@@ -39,18 +39,21 @@ Class UserModel extends BaseModel
         return SQL::getInstance()->selectOne("SELECT {$this->pk} FROM {$this->table} WHERE  login = :login AND pass = :pass", $params);
     }
 
-    public function getById($params)
+    public function getById($table ,$params)
     {
         $patch = '';
         foreach ($params as $key => $param){
             $patch .= "$key = :$key";
         }
-        $fields =  SQL::getInstance()->selectOne("SELECT * FROM users WHERE {$patch}" , $params);
+
+        $fields =  SQL::getInstance()->selectOne("SELECT * FROM {$table}
+        WHERE {$patch}" , $params);
+
         foreach ($fields as $key => $field) {
             $this->fields[$key] = $field;
         }
         return $this;
-
-
     }
+
+
 }
