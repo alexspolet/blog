@@ -1,4 +1,6 @@
 <?php
+//TODO Допилить разделение прав доступа
+
 /**
  * Created by PhpStorm.
  * User: alex
